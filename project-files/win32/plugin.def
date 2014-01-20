@@ -6,10 +6,10 @@ EXPORTS
 	AmxLoad
 	AmxUnload
 	ProcessTick
-	#callbacks
+	; callbacks
 	OnPlayerConnect
 	OnPlayerDisconnect
-	#
+	; 
 	OnPlayerStateChange
 	OnVehicleDeath
 	OnPlayerDeath
