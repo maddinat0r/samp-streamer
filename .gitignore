@@ -6,11 +6,13 @@
 # Directories
 [Dd]ebug/
 [Rr]elease/
+bin/
 
 # Visual Studio files
 *.sdf
 *.user
 *.suo
+*.opensdf
 
 # Windows shortcuts
 *.lnk
