@@ -11,3 +11,6 @@
 *.sdf
 *.user
 *.suo
+
+# Windows shortcuts
+*.lnk
