@@ -3,11 +3,12 @@
 *.lo
 *.o
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
+# Directories
+[Dd]ebug/
+[Rr]elease/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+# Visual Studio files
+*.sln
+*.sdf
+*.user
+*.suo

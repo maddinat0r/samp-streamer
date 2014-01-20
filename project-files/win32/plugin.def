@@ -1,0 +1,15 @@
+LIBRARY	"streamer"
+EXPORTS
+	Supports
+	Load
+	Unload
+	AmxLoad
+	AmxUnload
+	ProcessTick
+	#callbacks
+	OnPlayerConnect
+	OnPlayerDisconnect
+	#
+	OnPlayerStateChange
+	OnVehicleDeath
+	OnPlayerDeath
