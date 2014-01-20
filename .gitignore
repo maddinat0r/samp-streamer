@@ -8,7 +8,6 @@
 [Rr]elease/
 
 # Visual Studio files
-*.sln
 *.sdf
 *.user
 *.suo
