@@ -13,6 +13,8 @@ bin/
 *.user
 *.suo
 *.opensdf
+*.psess
+*.vsp
 
 # Windows shortcuts
 *.lnk
