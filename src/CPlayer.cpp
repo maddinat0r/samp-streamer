@@ -98,17 +98,16 @@ bool CPlayer::IsInSight(float x, float y, float z)
 
 	float 
 		scal_prod,
-		vec_len[2];
+		vec_len;
 
 	x -= m_CameraPos[0];
 	y -= m_CameraPos[1];
 	z -= m_CameraPos[2];
 
 	scal_prod = (m_CameraDir[0] * x) + (m_CameraDir[1] * y) + (m_CameraDir[2] * z);
-	vec_len[0] = sqrtf(x*x + y*y + z*z);
-	vec_len[1] = sqrtf(m_CameraDir[0]*m_CameraDir[0] + m_CameraDir[1]*m_CameraDir[1] + m_CameraDir[2]*m_CameraDir[2]);
+	vec_len = sqrtf(x*x + y*y + z*z);
 
-	float cal_angle = acosf(scal_prod / (vec_len[0] * vec_len[1])) * 180.0f / 3.14159265f;
+	float cal_angle = acosf(scal_prod / vec_len) * (180.0f / 3.14159265f);
 	ret_val = cal_angle <= camera_angle;
 
 
