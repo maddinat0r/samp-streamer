@@ -3,14 +3,10 @@
 #define INC_CFUNCCALL_H
 
 
-#include <queue>
-#include <boost/move/move.hpp>
 #include <boost/function.hpp>
-#include <boost/thread/mutex.hpp>
+#include <readerwriterqueue.h>
 
-using std::queue;
 using boost::function;
-using boost::mutex;
 
 
 class CFuncCall
@@ -18,10 +14,11 @@ class CFuncCall
 private:
 	static CFuncCall *m_Instance;
 
-	mutex m_QueueMtx;
-	queue<function<void()>> m_FuncQueue;
+	moodycamel::ReaderWriterQueue<function<void()>> m_FuncQueue;
 
-	CFuncCall() {}
+	CFuncCall() :
+		m_FuncQueue(10000)
+	{}
 	~CFuncCall() {}
 
 public:
@@ -36,9 +33,7 @@ public:
 
 	inline void QueueFunc(function<void()> &&func)
 	{
-		m_QueueMtx.lock();
-		m_FuncQueue.push(boost::move(func));
-		m_QueueMtx.unlock();
+		m_FuncQueue.try_enqueue(func);
 	}
 	void ProcessFuncCalls();
 };
