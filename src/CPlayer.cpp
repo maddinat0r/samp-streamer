@@ -84,13 +84,6 @@ bool CPlayer::IsInSight(float x, float y, float z)
 	bool ret_val = false;
 	m_DataLock = true;
 
-	/*
-    LONGLONG g_Frequency, g_CurentCount, g_LastCount; 
-    QueryPerformanceFrequency((LARGE_INTEGER*)&g_Frequency);
-    QueryPerformanceCounter((LARGE_INTEGER*)&g_CurentCount); 
-	*/
-
-
 	float camera_angle = 0.0f;
 
 	switch (m_CameraMode)
@@ -118,11 +111,6 @@ bool CPlayer::IsInSight(float x, float y, float z)
 	float cal_angle = acosf(scal_prod / (vec_len[0] * vec_len[1])) * 180.0f / 3.14159265f;
 	ret_val = cal_angle <= camera_angle;
 
-	/*
-    QueryPerformanceCounter((LARGE_INTEGER*)&g_LastCount); 
-    double dTimeDiff = (((double)(g_LastCount-g_CurentCount))/((double)g_Frequency)) * 1000.0;  
-	sampgdk_logprintf("time: %f; angle: %f", dTimeDiff, cal_angle);
-	*/
 
 	m_DataLock = false;
 	return ret_val;

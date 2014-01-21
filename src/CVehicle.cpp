@@ -8,6 +8,9 @@
 namespace chrono = boost::chrono;
 
 
+//#include <Windows.h>
+
+
 CVehicleHandler *CVehicleHandler::m_Instance = nullptr;
 
 
@@ -56,10 +59,23 @@ CVehicle *CVehicleHandler::FindVehicleByRealID(uint32_t vehid)
 void CVehicleHandler::StreamAll(CPlayer *player)
 {
 	point &player_pos = player->GetPos();
+
+    /*
+	LONGLONG g_Frequency, g_CurentCount, g_LastCount; 
+    QueryPerformanceFrequency((LARGE_INTEGER*)&g_Frequency);
+    QueryPerformanceCounter((LARGE_INTEGER*)&g_CurentCount); 
+	*/
+
 	auto check_func = [&player_pos](boost::tuple<point, CVehicle *> const& v) { return geo::distance(player_pos, boost::get<1>(v)->GetPos()) <= 400.0f; };
 
 	std::vector<boost::tuple<point, CVehicle *> > query_res;
 	m_Rtree.query(geo::index::satisfies(check_func), std::back_inserter(query_res));
+
+    /*
+	QueryPerformanceCounter((LARGE_INTEGER*)&g_LastCount); 
+    double dTimeDiff = (((double)(g_LastCount-g_CurentCount))/((double)g_Frequency))*1000.0;  
+	printf("time: %f\n", dTimeDiff);
+	*/
 
 	for(auto &t : query_res)
 	{
