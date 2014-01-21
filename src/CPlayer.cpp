@@ -53,7 +53,7 @@ void CPlayerHandler::ThreadFunc()
 			CVehicleHandler::Get()->StreamAll(i->second);
 		}
 
-		this_thread::sleep_for(chrono::milliseconds(10));
+		this_thread::sleep_for(chrono::milliseconds(20));
 	}
 }
 
@@ -79,22 +79,33 @@ void CPlayer::Update()
 }
 
 
-bool CPlayer::IsInSight(float x, float y, float z)
+bool CPlayer::IsInRange(float x, float y, float z, RangeCheckType type)
 {
 	bool ret_val = false;
 	m_DataLock = true;
 
-	float camera_angle = 0.0f;
-
-	switch (m_CameraMode)
+	switch(type)
 	{
-	case 4:
-		camera_angle = 41.5f;
-		break;
+		case RangeCheckType::RADIUS:
+		{
+			//TODO: implement radius check
+			//TODO: create global option class for streaming values and range-check type
 
-	default:
-		break;
-	}
+		} break;
+	
+		case RangeCheckType::SIGHT:
+		{
+			float camera_angle = 0.0f;
+
+			switch (m_CameraMode)
+			{
+			case 4:
+				camera_angle = 41.5f;
+				break;
+
+			default:
+				break;
+			}
 
 	float 
 		scal_prod,
@@ -109,7 +120,8 @@ bool CPlayer::IsInSight(float x, float y, float z)
 
 	float cal_angle = acosf(scal_prod / vec_len) * (180.0f / 3.14159265f);
 	ret_val = cal_angle <= camera_angle;
-
+		} break;
+	}
 
 	m_DataLock = false;
 	return ret_val;

@@ -81,8 +81,7 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 	{
 		CVehicle *vehicle = boost::get<1>(t);
 		point veh_pos = vehicle->GetPos();
-		if(player->IsInSight(geo::get<0>(veh_pos), geo::get<1>(veh_pos), geo::get<2>(veh_pos))) 
-			//TODO: it get's slow somewhere here
+		if(player->IsInRange(geo::get<0>(veh_pos), geo::get<1>(veh_pos), geo::get<2>(veh_pos), RangeCheckType::RADIUS))
 		{
 			if(vehicle->m_StreamedFor.empty())
 				CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::CreateInternalVeh, vehicle));

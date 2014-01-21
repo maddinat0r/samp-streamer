@@ -61,7 +61,6 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, i
 		CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(GetPlayerVehicleID(playerid));
 		CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid); 
 		//TODO: callbacks!
-		//TODO: resolve issue of slow updating
 	}
 	return true;
 }
