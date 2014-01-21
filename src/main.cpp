@@ -18,20 +18,20 @@ PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
 {
 	sampgdk_init(ppData);
 	
-	ServerLog::Printf(" >> plugin.streamer: v0.1 successfully loaded.");
+	sampgdk_logprintf(" >> plugin.streamer: v0.1 successfully loaded.");
 	return true;
 }
 
 PLUGIN_EXPORT void PLUGIN_CALL Unload() 
 {
-	ServerLog::Printf("plugin.streamer: Unloading plugin...");
+	sampgdk_logprintf("plugin.streamer: Unloading plugin...");
 	
 	CFuncCall::Get()->Destroy();
 	CPlayerHandler::Get()->Destroy();
 	CVehicleHandler::Get()->Destroy();
 	sampgdk_cleanup();
 
-	ServerLog::Printf("plugin.streamer: Plugin unloaded."); 
+	sampgdk_logprintf("plugin.streamer: Plugin unloaded."); 
 }
 
 PLUGIN_EXPORT void PLUGIN_CALL ProcessTick() 
