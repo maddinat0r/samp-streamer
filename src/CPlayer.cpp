@@ -74,12 +74,12 @@ void CPlayer::Update()
 }
 
 
-bool CPlayer::IsInRange(float x, float y, float z, RangeCheckType type)
+bool CPlayer::IsInRange(float x, float y, float z)
 {
 	bool ret_val = false;
 	m_DataLock = true;
 
-	switch(type)
+	switch(COption::Get()->GetRangeCheckType())
 	{
 		case RangeCheckType::RADIUS:
 		{

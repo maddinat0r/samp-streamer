@@ -64,7 +64,8 @@ public: //functions
 	}
 
 	void Update();
-	bool IsInRange(float x, float y, float z, RangeCheckType type);
+	bool IsInRange(float x, float y, float z);
+
 };
 
 
