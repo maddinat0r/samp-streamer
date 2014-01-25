@@ -102,8 +102,18 @@ bool CPlayer::IsInRange(float x, float y, float z)
 
 			switch (m_CameraMode)
 			{
-			case 4:
-				camera_angle = 41.5f;
+			case 4: //on-foot
+			case 7: //sniper
+			case 51: //heat-seaking rocketlauncher
+			case 53: //weapon aiming
+			case 46: //aiming with weapon "camera"
+			case 15: //fixed camera
+			case 18: //in-vehicle //TODO: driver drive-by has viewing angle depending on camera<->vehicle distance
+				camera_angle = 41.2f;
+				break;
+
+			case 16: //first-person
+				camera_angle = 36.8f;
 				break;
 
 			default:
