@@ -6,6 +6,7 @@
     <ClCompile Include="..\..\src\CVehicle.cpp" />
     <ClCompile Include="..\..\src\CPlayer.cpp" />
     <ClCompile Include="..\..\src\CFuncCall.cpp" />
+    <ClCompile Include="..\..\src\COption.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\main.h" />
@@ -13,5 +14,6 @@
     <ClInclude Include="..\..\src\CVehicle.h" />
     <ClInclude Include="..\..\src\CPlayer.h" />
     <ClInclude Include="..\..\src\CFuncCall.h" />
+    <ClInclude Include="..\..\src\COption.h" />
   </ItemGroup>
 </Project>

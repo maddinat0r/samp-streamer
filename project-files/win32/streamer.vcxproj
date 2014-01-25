@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\CFuncCall.cpp" />
+    <ClCompile Include="..\..\src\COption.cpp" />
     <ClCompile Include="..\..\src\CPlayer.cpp" />
     <ClCompile Include="..\..\src\CVehicle.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
@@ -19,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\CFuncCall.h" />
+    <ClInclude Include="..\..\src\COption.h" />
     <ClInclude Include="..\..\src\CPlayer.h" />
     <ClInclude Include="..\..\src\CVehicle.h" />
     <ClInclude Include="..\..\src\main.h" />

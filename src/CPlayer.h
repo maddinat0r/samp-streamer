@@ -18,15 +18,6 @@ namespace this_thread = boost::this_thread;
 typedef boost::geometry::model::point<float, 3, boost::geometry::cs::cartesian> point;
 
 
-class CPlayer;
-
-enum class RangeCheckType
-{
-	RADIUS,
-	SIGHT
-};
-
-
 class CPlayerHandler
 {
 private:
