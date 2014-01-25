@@ -121,7 +121,7 @@ public: //functions
 
 
 public: //callback functions
-	void OnPlayerEnter(CPlayer *player);
+	void OnPlayerEnter(CPlayer *player, int8_t seatid);
 	void OnPlayerExit(CPlayer *player);
 };
 

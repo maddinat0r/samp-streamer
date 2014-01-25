@@ -66,7 +66,19 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, i
 	{
 		CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(GetPlayerVehicleID(playerid));
 		CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid); 
+		
+		if(vehicle != nullptr)
+			vehicle->OnPlayerEnter(player, GetPlayerVehicleSeat(playerid));
+		
 		//TODO: callbacks!
+	}
+	else if(newstate = PLAYER_STATE_ONFOOT && (oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_PASSENGER))
+	{
+		CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(GetPlayerVehicleID(playerid));
+		CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid); 
+
+		if(vehicle != nullptr)
+			vehicle->OnPlayerExit(player);
 	}
 	return true;
 }

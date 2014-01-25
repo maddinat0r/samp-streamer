@@ -158,3 +158,21 @@ void CVehicle::Update()
 	GetVehicleZAngle(m_VehicleId, &m_FacingAngle);
 }
 
+void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)
+{
+	CVehicleHandler::Get()->RemoveVehicle(this, true);
+	m_SeatInfo.insert( unordered_map<int8_t, uint32_t>::value_type(seatid, player->GetId()) );
+}
+
+void CVehicle::OnPlayerExit(CPlayer *player)
+{
+	CVehicleHandler::Get()->AddVehicle(this, true);
+	for(unordered_map<int8_t, uint32_t>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
+	{
+		if(i->second == player->GetId())
+		{
+			m_SeatInfo.quick_erase(i);
+			break;
+		}
+	}
+}
