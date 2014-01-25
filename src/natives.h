@@ -16,6 +16,10 @@ namespace Native
 {
 	AMX_DECLARE_NATIVE(Streamer_CreateVehicle);
 
+	AMX_DECLARE_NATIVE(Streamer_SetRangeCheckType);
+	AMX_DECLARE_NATIVE(Streamer_GetRangeCheckType);
+	AMX_DECLARE_NATIVE(Streamer_SetVehicleStreamDist);
+	AMX_DECLARE_NATIVE(Streamer_GetVehicleStreamDist);
 }
 
 

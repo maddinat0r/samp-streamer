@@ -87,6 +87,11 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDeath(int playerid, int killerid, int rea
 extern "C" const AMX_NATIVE_INFO native_list[] = 
 {
 	AMX_DEFINE_NATIVE(Streamer_CreateVehicle)
+
+	AMX_DEFINE_NATIVE(Streamer_SetRangeCheckType)
+	AMX_DEFINE_NATIVE(Streamer_GetRangeCheckType)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleStreamDist)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleStreamDist)
 	{0, 0}
 };
 
