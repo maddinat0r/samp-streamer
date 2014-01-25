@@ -85,6 +85,11 @@ bool CPlayer::IsInRange(float x, float y, float z)
 	bool ret_val = false;
 	m_DataLock = true;
 
+	//adjust position relative to velocity
+	x += m_Velocity[0];
+	y += m_Velocity[1];
+	z += m_Velocity[2];
+
 	switch(COption::Get()->GetRangeCheckType())
 	{
 		case RangeCheckType::RADIUS:
