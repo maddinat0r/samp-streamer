@@ -125,19 +125,21 @@ bool CPlayer::IsInRange(float x, float y, float z)
 				break;
 			}
 
-	float 
-		scal_prod,
-		vec_len;
+			float 
+				scal_prod,
+				vec_len;
 
-	x -= m_CameraPos[0];
-	y -= m_CameraPos[1];
-	z -= m_CameraPos[2];
+			x -= m_CameraPos[0];
+			y -= m_CameraPos[1];
+			z -= m_CameraPos[2];
 
-	scal_prod = (m_CameraDir[0] * x) + (m_CameraDir[1] * y) + (m_CameraDir[2] * z);
-	vec_len = sqrtf(x*x + y*y + z*z);
-
-	float cal_angle = acosf(scal_prod / vec_len) * (180.0f / 3.14159265f);
-	ret_val = cal_angle <= camera_angle;
+			scal_prod = (m_CameraDir[0] * x) + (m_CameraDir[1] * y) + (m_CameraDir[2] * z);
+			vec_len = sqrtf(x*x + y*y + z*z);
+			if(vec_len <= COption::Get()->GetVehicleStreamDistance())
+			{
+				float cal_angle = acosf(scal_prod / vec_len) * (180.0f / 3.14159265f);
+				ret_val = cal_angle <= camera_angle;
+			}
 		} break;
 	}
 
