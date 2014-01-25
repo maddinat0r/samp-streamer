@@ -66,7 +66,10 @@ void CVehicleHandler::StreamAll(CPlayer *player)
     QueryPerformanceCounter((LARGE_INTEGER*)&g_CurentCount); 
 	*/
 
-	auto check_func = [&player_pos](boost::tuple<point, CVehicle *> const& v) { return geo::distance(player_pos, boost::get<1>(v)->GetPos()) <= 400.0f; };
+	auto check_func = [&player_pos](boost::tuple<point, CVehicle *> const& v) 
+	{
+		return geo::distance(player_pos, boost::get<1>(v)->GetPos()) <= 400.0f; 
+	};
 
 	std::vector<boost::tuple<point, CVehicle *> > query_res;
 	m_Rtree.query(geo::index::satisfies(check_func), std::back_inserter(query_res));
