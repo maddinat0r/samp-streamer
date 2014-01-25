@@ -89,9 +89,11 @@ bool CPlayer::IsInRange(float x, float y, float z)
 	{
 		case RangeCheckType::RADIUS:
 		{
-			//TODO: implement radius check
-			//TODO: create global option class for streaming values and range-check type
+			x -= geo::get<0>(m_Pos);
+			y -= geo::get<1>(m_Pos);
+			z -= geo::get<2>(m_Pos);
 
+			ret_val = sqrtf(x*x + y*y + z*z) <= COption::Get()->GetVehicleStreamDistance();
 		} break;
 	
 		case RangeCheckType::SIGHT:
