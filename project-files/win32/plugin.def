@@ -9,7 +9,7 @@ EXPORTS
 	; callbacks
 	OnPlayerConnect
 	OnPlayerDisconnect
-	; 
+	OnPlayerUpdate
 	OnPlayerStateChange
 	OnVehicleDeath
 	OnPlayerDeath

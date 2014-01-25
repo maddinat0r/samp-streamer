@@ -18,46 +18,6 @@ namespace this_thread = boost::this_thread;
 typedef boost::geometry::model::point<float, 3, boost::geometry::cs::cartesian> point;
 
 
-class CPlayerHandler
-{
-private:
-	static CPlayerHandler *m_Instance;
-
-	thread *m_Thread;
-	atomic<bool> m_ThreadRunning;
-
-	unordered_map<uint16_t, CPlayer *> m_Players;
-
-
-	void ThreadFunc();
-
-	CPlayerHandler();
-	~CPlayerHandler();
-public:
-	inline static CPlayerHandler *Get()
-	{
-		return m_Instance;
-	}
-	inline void Destroy()
-	{
-		delete this;
-	}
-
-
-	inline void AddPlayer(uint16_t playerid, CPlayer *player)
-	{
-		m_Players.insert(unordered_map<uint16_t, CPlayer *>::value_type(playerid, player));
-	}
-	inline void RemovePlayer(uint16_t playerid)
-	{
-		m_Players.quick_erase(m_Players.find(playerid));
-	}
-	CPlayer *FindPlayer(uint16_t playerid);
-
-	void UpdateAll();
-};
-
-
 class CPlayer
 {
 private: //variables
@@ -105,7 +65,54 @@ public: //functions
 
 	void Update();
 	bool IsInRange(float x, float y, float z, RangeCheckType type);
+};
 
+
+class CPlayerHandler
+{
+private: //variables
+	thread *m_Thread;
+	atomic<bool> m_ThreadRunning;
+
+	unordered_map<uint16_t, CPlayer *> m_Players;
+
+private: //internal functions
+	void ThreadFunc();
+	
+private: //constructor / deconstructor
+	CPlayerHandler();
+	~CPlayerHandler();
+
+
+public: //functions
+	inline void AddPlayer(uint16_t playerid, CPlayer *player)
+	{
+		m_Players.insert(unordered_map<uint16_t, CPlayer *>::value_type(playerid, player));
+	}
+	inline void RemovePlayer(uint16_t playerid)
+	{
+		m_Players.quick_erase(m_Players.find(playerid));
+	}
+	CPlayer *FindPlayer(uint16_t playerid);
+
+	inline void Update(uint16_t playerid)
+	{
+		m_Players.at(playerid)->Update();
+	}
+	
+
+private: //singleton
+	static CPlayerHandler *m_Instance;
+
+public: //singleton
+	inline static CPlayerHandler *Get()
+	{
+		return m_Instance;
+	}
+	inline void Destroy()
+	{
+		delete this;
+	}
 };
 
 

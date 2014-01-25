@@ -37,11 +37,6 @@ CPlayer *CPlayerHandler::FindPlayer(uint16_t playerid)
 	return player;
 }
 
-void CPlayerHandler::UpdateAll()
-{
-	for(unordered_map<uint16_t, CPlayer *>::iterator i = m_Players.begin(), end = m_Players.end(); i != end; ++i)
-		i->second->Update();
-}
 
 void CPlayerHandler::ThreadFunc()
 {

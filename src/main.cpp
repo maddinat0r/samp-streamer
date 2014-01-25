@@ -36,7 +36,6 @@ PLUGIN_EXPORT void PLUGIN_CALL Unload()
 
 PLUGIN_EXPORT void PLUGIN_CALL ProcessTick() 
 {
-	CPlayerHandler::Get()->UpdateAll();
 	CFuncCall::Get()->ProcessFuncCalls();
 }
 
@@ -53,6 +52,13 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDisconnect(int playerid, int reason)
 	CPlayerHandler::Get()->RemovePlayer(playerid);
 	return true;
 }
+
+PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerUpdate(int playerid) 
+{
+	CPlayerHandler::Get()->Update(playerid);
+	return true;
+}
+
 
 PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, int oldstate)
 {
