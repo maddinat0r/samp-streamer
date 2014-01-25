@@ -69,7 +69,7 @@ public:
 
 class CPlayer
 {
-private:
+private: //variables
 	atomic<bool> m_DataLock;
 
 
@@ -83,6 +83,7 @@ private:
 	float m_Velocity[3];
 
 
+private: //constructor / deconstructor
 	CPlayer(uint16_t playerid) :
 		m_DataLock(false),
 		
@@ -92,7 +93,7 @@ private:
 	{ }
 	~CPlayer() { }
 
-public:
+public: //functions
 	inline static CPlayer *Create(uint16_t playerid)
 	{
 		return new CPlayer(playerid);
@@ -101,11 +102,6 @@ public:
 	{
 		delete this;
 	}
-
-	/*inline bool IsLocked() const
-	{
-		return m_DataLock;
-	}*/
 
 	inline uint16_t GetId() const
 	{

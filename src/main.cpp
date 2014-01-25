@@ -78,19 +78,16 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDeath(int playerid, int killerid, int rea
 }
 
 
-#if defined __cplusplus
-extern "C"
-#endif
-const AMX_NATIVE_INFO natives_list[] = 
+extern "C" const AMX_NATIVE_INFO native_list[] = 
 {
-	{"Streamer_CreateVehicle",		Streamer_CreateVehicle},
+	AMX_DEFINE_NATIVE(Streamer_CreateVehicle)
 	{0, 0}
 };
 
 PLUGIN_EXPORT int PLUGIN_CALL AmxLoad(AMX *amx) 
 {
 	//CCallback::Get()->AddAmx(amx);
-	return amx_Register(amx, natives_list, -1);
+	return amx_Register(amx, native_list, -1);
 }
 
 PLUGIN_EXPORT int PLUGIN_CALL AmxUnload(AMX *amx) 

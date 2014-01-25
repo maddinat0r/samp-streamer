@@ -1,10 +1,9 @@
+#include "natives.h"
 #include "CVehicle.h"
-
-#include <sampgdk/core.h>
 
 
 //native Streamer_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);
-cell AMX_NATIVE_CALL Streamer_CreateVehicle(AMX* amx, cell* params)
+AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
 {	
 	CVehicle *veh = CVehicle::Create(
 		static_cast<uint16_t>(params[1]),

@@ -11,17 +11,27 @@ using boost::function;
 
 class CFuncCall
 {
-private:
-	static CFuncCall *m_Instance;
-
+private: //variables
 	moodycamel::ReaderWriterQueue<function<void()>> m_FuncQueue;
 
+private: //constructor / deconstructor
 	CFuncCall() :
 		m_FuncQueue(10000)
 	{}
 	~CFuncCall() {}
 
-public:
+public: //functions
+	inline void QueueFunc(function<void()> &&func)
+	{
+		m_FuncQueue.try_enqueue(func);
+	}
+	void ProcessFuncCalls();
+
+
+private: //singleton
+	static CFuncCall *m_Instance;
+
+public: //singleton
 	inline static CFuncCall *Get()
 	{
 		return m_Instance;
@@ -30,12 +40,6 @@ public:
 	{
 		delete m_Instance;
 	}
-
-	inline void QueueFunc(function<void()> &&func)
-	{
-		m_FuncQueue.try_enqueue(func);
-	}
-	void ProcessFuncCalls();
 };
 
 
