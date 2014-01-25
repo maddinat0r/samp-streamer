@@ -16,7 +16,7 @@ private: //variables
 
 private: //constructor / deconstructor
 	CFuncCall() :
-		m_FuncQueue(10000)
+		m_FuncQueue(100000)
 	{}
 	~CFuncCall() {}
 
