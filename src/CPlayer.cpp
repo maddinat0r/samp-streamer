@@ -1,7 +1,9 @@
 #include "CPlayer.h"
 #include "CVehicle.h"
+#include "COption.h"
 
 #include <sampgdk/a_players.h>
+#include <sampgdk/a_vehicles.h>
 #include <sampgdk/core.h>
 
 #include <boost/chrono/chrono.hpp>
@@ -70,7 +72,11 @@ void CPlayer::Update()
 	GetPlayerPos(m_Id, &tmp_pos[0], &tmp_pos[1], &tmp_pos[2]);
 	m_Pos = point(tmp_pos[0], tmp_pos[1], tmp_pos[2]);
 
-	GetPlayerVelocity(m_Id, &m_Velocity[0], &m_Velocity[1], &m_Velocity[2]);
+	m_InVehicle = GetPlayerVehicleID(m_Id);
+	if(m_InVehicle)
+		GetVehicleVelocity(m_InVehicle, &m_Velocity[0], &m_Velocity[1], &m_Velocity[2]);
+	else
+		GetPlayerVelocity(m_Id, &m_Velocity[0], &m_Velocity[1], &m_Velocity[2]);
 }
 
 

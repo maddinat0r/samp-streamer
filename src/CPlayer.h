@@ -33,14 +33,17 @@ private: //variables
 	point m_Pos;
 	float m_Velocity[3];
 
-
+	uint16_t m_InVehicle;
+	
 private: //constructor / deconstructor
 	CPlayer(uint16_t playerid) :
 		m_DataLock(false),
 		
 		m_Id(playerid),
 
-		m_CameraMode(0)
+		m_CameraMode(0),
+
+		m_InVehicle(0)
 	{ }
 	~CPlayer() { }
 
