@@ -4,6 +4,9 @@
 
 
 #include <cstdint>
+#include <boost/atomic.hpp>
+
+using boost::atomic;
 
 
 enum class RangeCheckType : uint8_t
@@ -18,9 +21,9 @@ enum class RangeCheckType : uint8_t
 class COption
 {
 private: //variables
-	RangeCheckType m_CheckType;
+	atomic<RangeCheckType> m_CheckType;
 
-	float m_VehicleStreamDist;
+	atomic<float> m_VehicleStreamDist;
 	
 private: //constructor / deconstructor
 	COption() :

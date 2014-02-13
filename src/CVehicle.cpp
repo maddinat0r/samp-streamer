@@ -8,9 +8,6 @@
 namespace chrono = boost::chrono;
 
 
-//#include <Windows.h>
-
-
 CVehicleHandler *CVehicleHandler::m_Instance = nullptr;
 
 
@@ -38,11 +35,11 @@ void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 
 CVehicle *CVehicleHandler::FindVehicle(uint32_t vid)
 {
-	CVehicle *vehicle = nullptr;
-	unordered_map<uint32_t, CVehicle *>::iterator i;
-	if( (i = m_Vehicles.find(vid)) != m_Vehicles.end())
-		vehicle = i->second;
-	return vehicle;
+	unordered_map<uint32_t, CVehicle *>::iterator i = m_Vehicles.find(vid);
+	if(i != m_Vehicles.end())
+		return i->second;
+	else
+		return nullptr;
 }
 
 CVehicle *CVehicleHandler::FindVehicleByRealID(uint32_t vehid)
@@ -60,12 +57,6 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 {
 	point &player_pos = player->GetPos();
 
-    /*
-	LONGLONG g_Frequency, g_CurentCount, g_LastCount; 
-    QueryPerformanceFrequency((LARGE_INTEGER*)&g_Frequency);
-    QueryPerformanceCounter((LARGE_INTEGER*)&g_CurentCount); 
-	*/
-
 	auto check_func = [&player_pos](boost::tuple<point, CVehicle *> const& v) 
 	{
 		return geo::distance(player_pos, boost::get<1>(v)->GetPos()) <= 400.0f; 
@@ -73,12 +64,6 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 
 	std::vector<boost::tuple<point, CVehicle *> > query_res;
 	m_Rtree.query(geo::index::satisfies(check_func), std::back_inserter(query_res));
-
-    /*
-	QueryPerformanceCounter((LARGE_INTEGER*)&g_LastCount); 
-    double dTimeDiff = (((double)(g_LastCount-g_CurentCount))/((double)g_Frequency))*1000.0;  
-	printf("time: %f\n", dTimeDiff);
-	*/
 
 	for(auto &t : query_res)
 	{
@@ -160,13 +145,12 @@ void CVehicle::Update()
 
 void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)
 {
-	CVehicleHandler::Get()->RemoveVehicle(this, true);
 	m_SeatInfo.insert( unordered_map<int8_t, uint32_t>::value_type(seatid, player->GetId()) );
+	CVehicleHandler::Get()->RemoveVehicle(this, true);
 }
 
 void CVehicle::OnPlayerExit(CPlayer *player)
 {
-	CVehicleHandler::Get()->AddVehicle(this, true);
 	for(unordered_map<int8_t, uint32_t>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
 	{
 		if(i->second == player->GetId())
@@ -175,4 +159,5 @@ void CVehicle::OnPlayerExit(CPlayer *player)
 			break;
 		}
 	}
+	CVehicleHandler::Get()->AddVehicle(this, true);
 }

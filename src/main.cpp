@@ -69,8 +69,6 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, i
 		
 		if(vehicle != nullptr)
 			vehicle->OnPlayerEnter(player, GetPlayerVehicleSeat(playerid));
-		
-		//TODO: callbacks!
 	}
 	else if(newstate = PLAYER_STATE_ONFOOT && (oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_PASSENGER))
 	{
