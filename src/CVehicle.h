@@ -31,7 +31,7 @@ class CVehicleHandler
 {
 private: //variables
 	unordered_map<uint32_t, CVehicle *> m_Vehicles;
-	geo::index::rtree<boost::tuple<point, CVehicle *>, geo::index::rstar<2000> > m_Rtree;
+	geo::index::rtree<boost::tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
 
 	CVehicleHandler() {}
 	~CVehicleHandler();
