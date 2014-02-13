@@ -80,7 +80,7 @@ void CPlayer::Update()
 }
 
 
-bool CPlayer::IsInRange(float x, float y, float z)
+bool CPlayer::ShouldStream(float x, float y, float z, float stream_dist)
 {
 	bool ret_val = false;
 	m_DataLock = true;
@@ -98,31 +98,27 @@ bool CPlayer::IsInRange(float x, float y, float z)
 			y -= geo::get<1>(m_Pos);
 			z -= geo::get<2>(m_Pos);
 
-			ret_val = sqrtf(x*x + y*y + z*z) <= COption::Get()->GetVehicleStreamDistance();
+			ret_val = sqrtf(x*x + y*y + z*z) <= stream_dist;
 		} break;
-	
 		case RangeCheckType::SIGHT:
 		{
 			float camera_angle = 0.0f;
 
 			switch (m_CameraMode)
 			{
-			case 4: //on-foot
-			case 7: //sniper
-			case 51: //heat-seaking rocketlauncher
-			case 53: //weapon aiming
-			case 46: //aiming with weapon "camera"
-			case 15: //fixed camera
-			case 18: //in-vehicle //TODO: driver drive-by has viewing angle depending on camera<->vehicle distance
-				camera_angle = 41.2f;
-				break;
+				case 4: //on-foot
+				case 7: //sniper
+				case 51: //heat-seaking rocketlauncher
+				case 53: //weapon aiming
+				case 46: //aiming with weapon "camera"
+				case 15: //fixed camera
+				case 18: //in-vehicle //TODO: driver drive-by has viewing angle depending on camera<->vehicle distance
+					camera_angle = 41.2f;
+					break;
 
-			case 16: //first-person
-				camera_angle = 36.8f;
-				break;
-
-			default:
-				break;
+				case 16: //first-person
+					camera_angle = 36.8f;
+					break;
 			}
 
 			float 
@@ -135,14 +131,13 @@ bool CPlayer::IsInRange(float x, float y, float z)
 
 			scal_prod = (m_CameraDir[0] * x) + (m_CameraDir[1] * y) + (m_CameraDir[2] * z);
 			vec_len = sqrtf(x*x + y*y + z*z);
-			if(vec_len <= COption::Get()->GetVehicleStreamDistance())
+			if(vec_len <= stream_dist)
 			{
 				float cal_angle = acosf(scal_prod / vec_len) * (180.0f / 3.14159265f);
 				ret_val = cal_angle <= camera_angle;
 			}
 		} break;
 	}
-
 	m_DataLock = false;
 	return ret_val;
 }

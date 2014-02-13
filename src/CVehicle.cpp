@@ -1,6 +1,7 @@
 #include "CVehicle.h"
 #include "CPlayer.h"
 #include "CFuncCall.h"
+#include "COption.h"
 
 #include <sampgdk/a_vehicles.h>
 
@@ -52,40 +53,40 @@ CVehicle *CVehicleHandler::FindVehicleByRealID(uint32_t vehid)
 	return nullptr;
 }
 
-
+bool stream_check_func(const boost::tuple<point, CVehicle *> &v, CPlayer *player)
+{
+	const point &veh_pos = boost::get<0>(v);
+	return player->ShouldStream(geo::get<0>(veh_pos), geo::get<1>(veh_pos), geo::get<2>(veh_pos), COption::Get()->GetVehicleStreamDistance());
+}
 void CVehicleHandler::StreamAll(CPlayer *player)
 {
-	point &player_pos = player->GetPos();
-
-	auto check_func = [&player_pos](boost::tuple<point, CVehicle *> const& v) 
-	{
-		return geo::distance(player_pos, boost::get<1>(v)->GetPos()) <= 400.0f; 
-	};
-
 	std::vector<boost::tuple<point, CVehicle *> > query_res;
-	m_Rtree.query(geo::index::satisfies(check_func), std::back_inserter(query_res));
+	m_Rtree.query(geo::index::satisfies(boost::bind(&stream_check_func, _1, player)), std::back_inserter(query_res));
+	
+	set<CVehicle *> invalid_vehicles = player->StreamedVehicles;
 
 	for(auto &t : query_res)
 	{
 		CVehicle *vehicle = boost::get<1>(t);
-		point veh_pos = vehicle->GetPos();
-		if(player->IsInRange(geo::get<0>(veh_pos), geo::get<1>(veh_pos), geo::get<2>(veh_pos)))
-		{
-			if(vehicle->m_StreamedFor.empty())
-				CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::CreateInternalVeh, vehicle));
+		if(vehicle->m_StreamedFor.empty())
+			CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::CreateInternalVeh, vehicle));
 			
-			vehicle->m_StreamedFor.insert(player->GetId());
-		}
-		else
-		{
-			if(!vehicle->m_StreamedFor.empty())
-			{
-				vehicle->m_StreamedFor.erase(player->GetId());
+		vehicle->m_StreamedFor.insert(player->GetId());
+		player->StreamedVehicles.insert(vehicle);
+		
+		invalid_vehicles.erase(vehicle);
+	}
 
-				if(vehicle->m_StreamedFor.empty())
-					CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::DestroyInternalVeh, vehicle));
+	for(auto &v : invalid_vehicles)
+	{
+		if(!v->m_StreamedFor.empty() && v->m_SeatInfo.empty())
+		{
+			v->m_StreamedFor.erase(player->GetId());
+			player->StreamedVehicles.erase(v);
+
+			if(v->m_StreamedFor.empty())
+				CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::DestroyInternalVeh, v));
 				
-			}
 		}
 	}
 }

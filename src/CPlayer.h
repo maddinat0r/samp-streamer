@@ -3,6 +3,7 @@
 #define INC_CPLAYER_H
 
 
+#include <set>
 #include <boost/atomic.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/unordered_map.hpp>
@@ -10,12 +11,15 @@
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point.hpp>
 
+using std::set;
 using boost::atomic;
 using boost::thread;
 using boost::unordered_map;
 namespace this_thread = boost::this_thread;
 
 typedef boost::geometry::model::point<float, 3, boost::geometry::cs::cartesian> point;
+
+class CVehicle;
 
 
 class CPlayer
@@ -35,6 +39,9 @@ private: //variables
 
 	uint16_t m_InVehicle;
 	
+public: //variables
+	set<CVehicle *> StreamedVehicles;
+
 private: //constructor / deconstructor
 	CPlayer(uint16_t playerid) :
 		m_DataLock(false),
@@ -67,8 +74,7 @@ public: //functions
 	}
 
 	void Update();
-	bool IsInRange(float x, float y, float z);
-
+	bool ShouldStream(float x, float y, float z, float stream_dist);
 };
 
 
