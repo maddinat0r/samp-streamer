@@ -103,10 +103,7 @@ public: //functions
 		float pos_x, float pos_y, float pos_z, float pos_a,
 		int16_t color1, int16_t color2);
 
-	inline void Destroy() 
-	{ 
-		delete this;
-	}
+	void Destroy();
 
 	void Update();
 

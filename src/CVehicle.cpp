@@ -115,6 +115,12 @@ CVehicle *CVehicle::Create(uint16_t modelid,
 	return veh;
 }
 
+void CVehicle::Destroy()
+{
+	CVehicleHandler::Get()->RemoveVehicle(this);
+	delete this;
+}
+
 void CVehicle::CreateInternalVeh()
 {
 	m_VehicleId = CreateVehicle(m_ModelId, geo::get<0>(m_Pos), geo::get<1>(m_Pos), geo::get<2>(m_Pos), m_FacingAngle, m_Color[0], m_Color[1], -1);
