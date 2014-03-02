@@ -152,6 +152,7 @@ void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)
 
 void CVehicle::OnPlayerExit(CPlayer *player)
 {
+	Update();
 	for(unordered_map<int8_t, uint32_t>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
 	{
 		if(i->second == player->GetId())

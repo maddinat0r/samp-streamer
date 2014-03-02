@@ -62,21 +62,26 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerUpdate(int playerid)
 
 PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, int oldstate)
 {
-	if(oldstate = PLAYER_STATE_ONFOOT && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
+	if(oldstate == PLAYER_STATE_ONFOOT && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
 	{
 		CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(GetPlayerVehicleID(playerid));
-		CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid); 
-		
-		if(vehicle != nullptr)
+
+		if (vehicle != nullptr)
+		{
+			CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid);
 			vehicle->OnPlayerEnter(player, GetPlayerVehicleSeat(playerid));
+			player->OccupiedVehicle = vehicle;
+		}
 	}
-	else if(newstate = PLAYER_STATE_ONFOOT && (oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_PASSENGER))
+	else if(newstate == PLAYER_STATE_ONFOOT && (oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_PASSENGER))
 	{
-		CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(GetPlayerVehicleID(playerid));
 		CPlayer *player = CPlayerHandler::Get()->FindPlayer(playerid); 
 
-		if(vehicle != nullptr)
-			vehicle->OnPlayerExit(player);
+		if (player->OccupiedVehicle != nullptr)
+		{
+			player->OccupiedVehicle->OnPlayerExit(player);
+			player->OccupiedVehicle = nullptr;
+		}
 	}
 	return true;
 }

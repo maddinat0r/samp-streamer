@@ -40,7 +40,9 @@ private: //variables
 	uint16_t m_InVehicle;
 	
 public: //variables
+	//vehicle streamer data
 	set<CVehicle *> StreamedVehicles;
+	CVehicle *OccupiedVehicle;
 
 private: //constructor / deconstructor
 	CPlayer(uint16_t playerid) :
@@ -50,7 +52,9 @@ private: //constructor / deconstructor
 
 		m_CameraMode(0),
 
-		m_InVehicle(0)
+		m_InVehicle(0),
+
+		OccupiedVehicle(nullptr)
 	{ }
 	~CPlayer() { }
 
