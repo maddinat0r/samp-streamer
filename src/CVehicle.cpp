@@ -124,6 +124,11 @@ void CVehicle::Destroy()
 void CVehicle::CreateInternalVeh()
 {
 	m_VehicleId = CreateVehicle(m_ModelId, geo::get<0>(m_Pos), geo::get<1>(m_Pos), geo::get<2>(m_Pos), m_FacingAngle, m_Color[0], m_Color[1], -1);
+	SetVehicleParamsEx(m_VehicleId, m_ParamsEx[0], m_ParamsEx[1], m_ParamsEx[2], m_ParamsEx[3], m_ParamsEx[4], m_ParamsEx[5], m_ParamsEx[6]);
+	ChangeVehiclePaintjob(m_VehicleId, m_Paintjob);
+	SetVehicleHealth(m_VehicleId, m_Health);
+	UpdateVehicleDamageStatus(m_VehicleId, m_DamageStatus[0], m_DamageStatus[1], m_DamageStatus[2], m_DamageStatus[3]);
+	SetVehicleVirtualWorld(m_VehicleId, m_VirtualWorld);
 }
 
 void CVehicle::DestroyInternalVeh()
@@ -143,6 +148,10 @@ void CVehicle::Update()
 	geo::set<2>(m_Pos, tmp_pos[2]);
 
 	GetVehicleZAngle(m_VehicleId, &m_FacingAngle);
+	GetVehicleParamsEx(m_VehicleId, &m_ParamsEx[0], &m_ParamsEx[1], &m_ParamsEx[2], &m_ParamsEx[3], &m_ParamsEx[4], &m_ParamsEx[5], &m_ParamsEx[6]);
+	GetVehicleHealth(m_VehicleId, &m_Health);
+	GetVehicleDamageStatus(m_VehicleId, &m_DamageStatus[0], &m_DamageStatus[1], &m_DamageStatus[2], &m_DamageStatus[3]);
+	m_VirtualWorld = GetVehicleVirtualWorld(m_VehicleId);
 }
 
 void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)

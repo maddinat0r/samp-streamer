@@ -76,6 +76,11 @@ private: //variables
 	point m_Pos;
 	float m_FacingAngle;
 	int16_t m_Color[2];
+	uint8_t m_Paintjob;
+	float m_Health;
+	bool m_ParamsEx[7];
+	int m_DamageStatus[4];
+	int m_VirtualWorld;
 
 
 private: //internal variables
@@ -89,9 +94,22 @@ private: //constructor / destructor
 		m_Id(0),
 
 		m_ModelId(0),
+		m_FacingAngle(0.0f),
+		m_Paintjob(-1),
+		m_Health(1000.0f),
+		m_VirtualWorld(0),
 
 		m_VehicleId(0)
-	{ }
+	{ 
+		for (size_t i = 0; i < 2; ++i)
+			m_Color[i] = 0;
+
+		for (size_t i = 0; i < 7; ++i)
+			m_ParamsEx[i] = false;
+
+		for (size_t i = 0; i < 4; ++i)
+			m_DamageStatus[i] = 0;
+	}
 	~CVehicle() { }
 
 private: //internal functions
