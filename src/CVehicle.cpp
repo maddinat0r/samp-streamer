@@ -28,19 +28,15 @@ void CVehicleHandler::AddVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 {
 	if(only_rtree == false)
-	{
 		m_Vehicles.quick_erase(m_Vehicles.find(veh->m_Id));
-	}
+	
 	m_Rtree.remove(boost::make_tuple(veh->m_Pos, veh));
 }
 
 CVehicle *CVehicleHandler::FindVehicle(uint32_t vid)
 {
 	unordered_map<uint32_t, CVehicle *>::iterator i = m_Vehicles.find(vid);
-	if(i != m_Vehicles.end())
-		return i->second;
-	else
-		return nullptr;
+	return (i != m_Vehicles.end()) ? i->second : nullptr;
 }
 
 CVehicle *CVehicleHandler::FindVehicleByRealID(uint32_t vehid)
@@ -91,7 +87,6 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 	}
 }
 
-
 CVehicleHandler::~CVehicleHandler()
 {
 	for(unordered_map<uint32_t, CVehicle *>::iterator i = m_Vehicles.begin(), end = m_Vehicles.end(); i != end; ++i)
@@ -100,23 +95,9 @@ CVehicleHandler::~CVehicleHandler()
 
 
 
-
-void CVehicle::CreateInternalVeh()
-{
-	m_VehicleId = CreateVehicle(m_ModelId, geo::get<0>(m_Pos), geo::get<1>(m_Pos), geo::get<2>(m_Pos), m_FacingAngle, m_Color[0], m_Color[1], -1);
-}
-
-void CVehicle::DestroyInternalVeh()
-{
-	Update();
-	DestroyVehicle(m_VehicleId);
-	m_VehicleId = 0;
-}
-
-
-CVehicle *CVehicle::Create(uint16_t modelid, 
-		float pos_x, float pos_y, float pos_z, float pos_a,
-		int16_t color1, int16_t color2)
+CVehicle *CVehicle::Create(uint16_t modelid,
+	float pos_x, float pos_y, float pos_z, float pos_a,
+	int16_t color1, int16_t color2)
 {
 	CVehicle *veh = new CVehicle;
 
@@ -134,12 +115,26 @@ CVehicle *CVehicle::Create(uint16_t modelid,
 	return veh;
 }
 
+void CVehicle::CreateInternalVeh()
+{
+	m_VehicleId = CreateVehicle(m_ModelId, geo::get<0>(m_Pos), geo::get<1>(m_Pos), geo::get<2>(m_Pos), m_FacingAngle, m_Color[0], m_Color[1], -1);
+}
+
+void CVehicle::DestroyInternalVeh()
+{
+	Update();
+	DestroyVehicle(m_VehicleId);
+	m_VehicleId = 0;
+}
+
 void CVehicle::Update()
 {
 	float tmp_pos[3];
 
 	GetVehiclePos(m_VehicleId, &tmp_pos[0], &tmp_pos[1], &tmp_pos[2]);
-	m_Pos = point(tmp_pos[0], tmp_pos[1], tmp_pos[2]);
+	geo::set<0>(m_Pos, tmp_pos[0]);
+	geo::set<1>(m_Pos, tmp_pos[1]);
+	geo::set<2>(m_Pos, tmp_pos[2]);
 
 	GetVehicleZAngle(m_VehicleId, &m_FacingAngle);
 }
