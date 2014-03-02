@@ -118,6 +118,8 @@ CVehicle *CVehicle::Create(uint16_t modelid,
 void CVehicle::Destroy()
 {
 	CVehicleHandler::Get()->RemoveVehicle(this);
+	if (m_VehicleId != 0)
+		DestroyVehicle(m_VehicleId);
 	delete this;
 }
 
