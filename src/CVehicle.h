@@ -17,6 +17,7 @@ using boost::atomic;
 using boost::thread;
 using boost::unordered_map;
 using boost::unordered_set;
+using boost::tuple;
 namespace this_thread = boost::this_thread;
 
 namespace geo = boost::geometry;
@@ -31,7 +32,7 @@ class CVehicleHandler
 {
 private: //variables
 	unordered_map<uint32_t, CVehicle *> m_Vehicles;
-	geo::index::rtree<boost::tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
+	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
 
 	CVehicleHandler() {}
 	~CVehicleHandler();
@@ -84,6 +85,8 @@ private: //variables
 
 
 private: //internal variables
+	tuple<point, CVehicle *> m_LastRtreeValue;
+
 	uint16_t m_VehicleId;
 	unordered_set<uint32_t> m_StreamedFor;
 	unordered_map<int8_t, uint32_t> m_SeatInfo;

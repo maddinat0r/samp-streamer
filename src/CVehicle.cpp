@@ -22,7 +22,8 @@ void CVehicleHandler::AddVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 
 		m_Vehicles.insert(unordered_map<uint32_t, CVehicle *>::value_type(veh->m_Id, veh));
 	}
-	m_Rtree.insert(boost::make_tuple(veh->m_Pos, veh));
+	veh->m_LastRtreeValue = boost::make_tuple(veh->m_Pos, veh);
+	m_Rtree.insert(veh->m_LastRtreeValue);
 }
 
 void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
@@ -30,7 +31,7 @@ void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 	if(only_rtree == false)
 		m_Vehicles.quick_erase(m_Vehicles.find(veh->m_Id));
 	
-	m_Rtree.remove(boost::make_tuple(veh->m_Pos, veh));
+	m_Rtree.remove(veh->m_LastRtreeValue);
 }
 
 CVehicle *CVehicleHandler::FindVehicle(uint32_t vid)
