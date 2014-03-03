@@ -100,7 +100,7 @@ private: //constructor / destructor
 		m_Pos(0.0f, 0.0f, 0.0f),
 		m_ModelId(0),
 		m_FacingAngle(0.0f),
-		m_Paintjob(-1),
+		m_Paintjob(3),
 		m_Health(1000.0f),
 		m_VirtualWorld(0),
 
