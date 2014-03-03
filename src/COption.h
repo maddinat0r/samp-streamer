@@ -24,12 +24,16 @@ private: //variables
 	atomic<RangeCheckType> m_CheckType;
 
 	atomic<float> m_VehicleStreamDist;
+
+	bool m_UseVehicleParamsEx;
 	
 private: //constructor / deconstructor
 	COption() :
 		m_CheckType(RangeCheckType::RADIUS),
 
-		m_VehicleStreamDist(400.0f)
+		m_VehicleStreamDist(400.0f),
+
+		m_UseVehicleParamsEx(false)
 	{ }
 	~COption() { }
 
@@ -53,6 +57,14 @@ public: //functions
 		return m_VehicleStreamDist;
 	}
 
+	inline void UseVehicleParamsEx(bool use)
+	{
+		m_UseVehicleParamsEx = use;
+	}
+	inline bool IsUsingVehicleParamsEx() const
+	{
+		return m_UseVehicleParamsEx;
+	}
 
 private: //singleton
 	static COption *m_Instance;

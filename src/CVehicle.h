@@ -76,7 +76,8 @@ private: //variables
 	uint16_t m_ModelId;
 	point m_Pos;
 	float m_FacingAngle;
-	int16_t m_Color[2];
+	float m_Velocity[3];
+	uint8_t m_Color[2];
 	uint8_t m_Paintjob;
 	float m_Health;
 	bool m_ParamsEx[7];
@@ -96,6 +97,7 @@ private: //constructor / destructor
 	CVehicle() :
 		m_Id(0),
 
+		m_Pos(0.0f, 0.0f, 0.0f),
 		m_ModelId(0),
 		m_FacingAngle(0.0f),
 		m_Paintjob(-1),
@@ -103,7 +105,10 @@ private: //constructor / destructor
 		m_VirtualWorld(0),
 
 		m_VehicleId(0)
-	{ 
+	{
+		for (size_t i = 0; i < 3; ++i)
+			m_Velocity[i] = 0.0f;
+
 		for (size_t i = 0; i < 2; ++i)
 			m_Color[i] = 0;
 
@@ -122,7 +127,7 @@ private: //internal functions
 public: //functions
 	static CVehicle *Create(uint16_t modelid, 
 		float pos_x, float pos_y, float pos_z, float pos_a,
-		int16_t color1, int16_t color2);
+		uint8_t color1, uint8_t color2);
 
 	void Destroy();
 
@@ -132,9 +137,35 @@ public: //functions
 	{
 		return m_Id;
 	}
-	inline point GetPos()
+
+	point &GetPos();
+	void SetPos(float x, float y, float z);
+	float GetFacingAngle();
+	void SetFacingAngle(float angle);
+	float *GetVelocity();
+	void SetVelocity(float x, float y, float z);
+	inline uint8_t *GetColor()
 	{
-		return m_Pos;
+		return &(m_Color[0]);
+	}
+	void SetColor(uint8_t color1, uint8_t color2);
+	inline uint8_t GetPaintjob() const
+	{
+		return m_Paintjob;
+	}
+	void SetPaintjob(uint8_t paintjobid);
+	float GetHealth();
+	void SetHealth(float health);
+	int *GetDamageStatus();
+	void SetDamageStatus(int panels, int doors, int lights, int tires);
+	inline int GetVirtualWorld() const
+	{
+		return m_VirtualWorld;
+	}
+	void SetVirtualWorld(int worldid);
+	inline uint16_t GetModelId() const
+	{
+		return m_ModelId;
 	}
 
 

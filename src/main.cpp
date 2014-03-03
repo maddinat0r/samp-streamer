@@ -101,12 +101,34 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDeath(int playerid, int killerid, int rea
 
 extern "C" const AMX_NATIVE_INFO native_list[] = 
 {
-	AMX_DEFINE_NATIVE(Streamer_CreateVehicle)
-
 	AMX_DEFINE_NATIVE(Streamer_SetRangeCheckType)
 	AMX_DEFINE_NATIVE(Streamer_GetRangeCheckType)
 	AMX_DEFINE_NATIVE(Streamer_SetVehicleStreamDist)
 	AMX_DEFINE_NATIVE(Streamer_GetVehicleStreamDist)
+	AMX_DEFINE_NATIVE(Streamer_ManualVehicleEngineAndLights)
+
+
+	AMX_DEFINE_NATIVE(Streamer_CreateVehicle)
+	AMX_DEFINE_NATIVE(Streamer_DestroyVehicle)
+	AMX_DEFINE_NATIVE(Streamer_GetVehiclePos)
+	AMX_DEFINE_NATIVE(Streamer_SetVehiclePos)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleZAngle)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleZAngle)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleVelocity)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleVelocity)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleColor)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleColor)
+	AMX_DEFINE_NATIVE(Streamer_GetVehiclePaintjob)
+	AMX_DEFINE_NATIVE(Streamer_SetVehiclePaintjob)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleHealth)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleHealth)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleDamageStatus)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleDamageStatus)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleVirtualWorld)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleVirtualWorld)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleModel)
+	AMX_DEFINE_NATIVE(Streamer_GetPlayerVehicleID)
+
 	{0, 0}
 };
 
