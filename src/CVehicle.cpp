@@ -68,7 +68,7 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 		if(vehicle->m_StreamedFor.empty())
 			CFuncCall::Get()->QueueFunc(boost::bind(&CVehicle::CreateInternalVeh, vehicle));
 			
-		vehicle->m_StreamedFor.insert(player->GetId());
+		vehicle->m_StreamedFor.insert(player);
 		player->StreamedVehicles.insert(vehicle);
 		
 		invalid_vehicles.erase(vehicle);
@@ -78,7 +78,7 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 	{
 		if(!v->m_StreamedFor.empty() && v->m_SeatInfo.empty())
 		{
-			v->m_StreamedFor.erase(player->GetId());
+			v->m_StreamedFor.erase(player);
 			player->StreamedVehicles.erase(v);
 
 			if(v->m_StreamedFor.empty())
@@ -286,16 +286,16 @@ void CVehicle::SetVirtualWorld(int worldid)
 
 void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)
 {
-	m_SeatInfo.insert( unordered_map<int8_t, uint32_t>::value_type(seatid, player->GetId()) );
+	m_SeatInfo.insert( unordered_map<int8_t, CPlayer *>::value_type(seatid, player) );
 	CVehicleHandler::Get()->RemoveVehicle(this, true);
 }
 
 void CVehicle::OnPlayerExit(CPlayer *player)
 {
 	Update();
-	for(unordered_map<int8_t, uint32_t>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
+	for(unordered_map<int8_t, CPlayer *>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
 	{
-		if(i->second == player->GetId())
+		if(i->second == player)
 		{
 			m_SeatInfo.quick_erase(i);
 			break;

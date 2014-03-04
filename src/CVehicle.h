@@ -89,8 +89,8 @@ private: //internal variables
 	tuple<point, CVehicle *> m_LastRtreeValue;
 
 	uint16_t m_VehicleId;
-	unordered_set<uint32_t> m_StreamedFor;
-	unordered_map<int8_t, uint32_t> m_SeatInfo;
+	unordered_set<CPlayer *> m_StreamedFor;
+	unordered_map<int8_t, CPlayer *> m_SeatInfo;
 
 
 private: //constructor / destructor
