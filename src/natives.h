@@ -19,8 +19,6 @@ namespace Native
 	AMX_DECLARE_NATIVE(Streamer_SetVehicleStreamDist);
 	AMX_DECLARE_NATIVE(Streamer_GetVehicleStreamDist);
 
-	AMX_DECLARE_NATIVE(Streamer_ManualVehicleEngineAndLights);
-
 
 	
 	AMX_DECLARE_NATIVE(Streamer_CreateVehicle);

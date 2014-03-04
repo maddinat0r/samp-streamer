@@ -24,8 +24,6 @@ native E_STREAMER_RANGECHECK_TYPE:Streamer_GetRangeCheckType();
 native Streamer_SetVehicleStreamDist(Float:distance);
 native Float:Streamer_GetVehicleStreamDist();
 
-native Streamer_ManualVehicleEngineAndLights();
-
 
 
 native Streamer_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);

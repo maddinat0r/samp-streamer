@@ -302,6 +302,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleParamsEx)
 		return -1;
 
 
+	COption::Get()->UseVehicleParamsEx(true);
 	vehicle->SetParamsEx(params[2] != 0, params[3] != 0, params[4] != 0, params[5] != 0, params[6] != 0, params[7] != 0, params[8] != 0);
 	return 1;
 }
@@ -543,11 +544,4 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleStreamDist)
 {
 	float stream_dist = COption::Get()->GetVehicleStreamDistance();
 	return amx_ftoc(stream_dist);
-}
-
-//native Streamer_ManualVehicleEngineAndLights();
-AMX_DECLARE_NATIVE(Native::Streamer_ManualVehicleEngineAndLights)
-{
-	COption::Get()->UseVehicleParamsEx(true);
-	return 1;
 }

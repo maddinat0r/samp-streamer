@@ -121,7 +121,6 @@ extern "C" const AMX_NATIVE_INFO native_list[] =
 	AMX_DEFINE_NATIVE(Streamer_GetRangeCheckType)
 	AMX_DEFINE_NATIVE(Streamer_SetVehicleStreamDist)
 	AMX_DEFINE_NATIVE(Streamer_GetVehicleStreamDist)
-	AMX_DEFINE_NATIVE(Streamer_ManualVehicleEngineAndLights)
 
 
 	AMX_DEFINE_NATIVE(Streamer_CreateVehicle)
