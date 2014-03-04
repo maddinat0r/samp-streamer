@@ -41,26 +41,26 @@ PLUGIN_EXPORT void PLUGIN_CALL ProcessTick()
 
 
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerConnect(int playerid) 
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerConnect(int playerid)
 {
 	CPlayerHandler::Get()->AddPlayer(playerid, CPlayer::Create(playerid));
 	return true;
 }
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDisconnect(int playerid, int reason) 
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerDisconnect(int playerid, int reason)
 {
 	CPlayerHandler::Get()->RemovePlayer(playerid);
 	return true;
 }
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerUpdate(int playerid) 
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerUpdate(int playerid)
 {
 	CPlayerHandler::Get()->Update(playerid);
 	return true;
 }
 
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, int oldstate)
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerStateChange(int playerid, int newstate, int oldstate)
 {
 	if(oldstate == PLAYER_STATE_ONFOOT && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
 	{
@@ -86,13 +86,13 @@ PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerStateChange(int playerid, int newstate, i
 	return true;
 }
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnVehicleDeath(int vehicleid, int killerid)
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehicleDeath(int vehicleid, int killerid)
 {
 
 	return true;
 }
 
-PLUGIN_EXPORT bool PLUGIN_CALL OnPlayerDeath(int playerid, int killerid, int reason)
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerDeath(int playerid, int killerid, int reason)
 {
 
 	return true;
