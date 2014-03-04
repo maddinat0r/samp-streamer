@@ -52,7 +52,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePos)
 	(*addr_x) = amx_ftoc(veh_x);
 	(*addr_y) = amx_ftoc(veh_y);
 	(*addr_z) = amx_ftoc(veh_z);
-
+	
 	return 1;
 }
 
@@ -76,11 +76,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleZAngle)
 		return -1;
 
 
-	cell *addr_z = nullptr;
-	amx_GetAddr(amx, params[2], &addr_z);
+	cell *addr_a = nullptr;
+	amx_GetAddr(amx, params[2], &addr_a);
 
-	float veh_z = vehicle->GetFacingAngle();
-	(*addr_z) = amx_ftoc(veh_z);
+	float veh_a = vehicle->GetFacingAngle();
+	(*addr_a) = amx_ftoc(veh_a);
 
 	return 1;
 }
@@ -105,20 +105,13 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVelocity)
 		return -1;
 
 
-	cell
-		*addr_x = nullptr,
-		*addr_y = nullptr,
-		*addr_z = nullptr;
-	amx_GetAddr(amx, params[2], &addr_x);
-	amx_GetAddr(amx, params[3], &addr_y);
-	amx_GetAddr(amx, params[4], &addr_z);
-
 	float *veh_velocity = vehicle->GetVelocity();
-
-	(*addr_x) = amx_ftoc(veh_velocity[0]);
-	(*addr_y) = amx_ftoc(veh_velocity[1]);
-	(*addr_z) = amx_ftoc(veh_velocity[2]);
-
+	for (size_t i = 0; i < 3; ++i)
+	{
+		cell *addr_ptr = nullptr;
+		amx_GetAddr(amx, params[i + 2], &addr_ptr);
+		(*addr_ptr) = amx_ftoc(veh_velocity[i]);
+	}
 	return 1;
 }
 
@@ -142,16 +135,13 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
 		return -1;
 
 
-	cell
-		*addr_col1 = nullptr,
-		*addr_col2 = nullptr;
-	amx_GetAddr(amx, params[2], &addr_col1);
-	amx_GetAddr(amx, params[3], &addr_col2);
-
 	uint8_t *color_array = vehicle->GetColor();
-	(*addr_col1) = color_array[0];
-	(*addr_col2) = color_array[1];
-
+	for (size_t i = 0; i < 2; ++i)
+	{
+		cell *addr_ptr = nullptr;
+		amx_GetAddr(amx, params[i + 2], &addr_ptr);
+		(*addr_ptr) = color_array[i];
+	}
 	return 1;
 }
 
@@ -184,7 +174,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePaintjob)
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
 		return -1;
-
+	
 
 	vehicle->SetPaintjob(static_cast<uint8_t>(params[2]));
 	return 1;
@@ -227,22 +217,13 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDamageStatus)
 		return -1;
 
 
-	cell
-		*addr_panels = nullptr,
-		*addr_doors = nullptr,
-		*addr_lights = nullptr,
-		*addr_tires = nullptr;
-	amx_GetAddr(amx, params[2], &addr_panels);
-	amx_GetAddr(amx, params[3], &addr_doors);
-	amx_GetAddr(amx, params[4], &addr_lights);
-	amx_GetAddr(amx, params[5], &addr_tires);
-
 	int *dmg_status_array = vehicle->GetDamageStatus();
-	(*addr_panels) = dmg_status_array[0];
-	(*addr_doors) = dmg_status_array[1];
-	(*addr_lights) = dmg_status_array[2];
-	(*addr_tires) = dmg_status_array[3];
-
+	for (size_t i = 0; i < 4; ++i)
+	{
+		cell *addr_ptr = nullptr;
+		amx_GetAddr(amx, params[i + 2], &addr_ptr);
+		(*addr_ptr) = dmg_status_array[i];
+	}
 	return 1;
 }
 
