@@ -152,8 +152,14 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 	if (vehicle == nullptr)
 		return -1;
 
+	int8_t
+		color1 = static_cast<int8_t>(params[2]),
+		color2 = static_cast<int8_t>(params[3]);
 
-	vehicle->SetColor(static_cast<uint8_t>(params[2]), static_cast<uint8_t>(params[3]));
+	if (color1 > 255 || color2 > 255)
+		return -1;
+
+	vehicle->SetColor(static_cast<uint8_t>(color1), static_cast<uint8_t>(color2));
 	return 1;
 }
 
@@ -257,8 +263,14 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVirtualWorld)
 	if (vehicle == nullptr)
 		return -1;
 
+	int worldid = params[2];
 
-	vehicle->SetVirtualWorld(params[2]);
+	if (worldid < 0)
+		return -1;
+
+
+	vehicle->SetVirtualWorld(worldid);
+
 	return 1;
 }
 
