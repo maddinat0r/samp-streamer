@@ -5,6 +5,7 @@
 
 #include <boost/atomic.hpp>
 #include <boost/thread/thread.hpp>
+#include <boost/thread/mutex.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -15,6 +16,7 @@
 
 using boost::atomic;
 using boost::thread;
+using boost::mutex;
 using boost::unordered_map;
 using boost::unordered_set;
 using boost::tuple;
@@ -32,6 +34,7 @@ class CVehicleHandler
 {
 private: //variables
 	unordered_map<uint32_t, CVehicle *> m_Vehicles;
+	mutex m_RtreeMtx;
 	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
 
 	CVehicleHandler() {}
