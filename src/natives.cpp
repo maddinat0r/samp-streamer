@@ -7,13 +7,30 @@
 #include "COption.h"
 
 
+boost::random::mt19937 RandNumGenerator;
+boost::random::uniform_int_distribution<> RandNumColorDist(0, 255);
+
+
 //native Streamer_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);
 AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
 {	
+	int16_t
+		color1 = static_cast<int16_t>(params[6]),
+		color2 = static_cast<int16_t>(params[7]);
+
+	if (color1 > 255 || color2 > 255)
+		return -1;
+
+	if (color1 < 0)
+		color1 = RandNumColorDist(RandNumGenerator);
+
+	if (color2 < 0)
+		color2 = RandNumColorDist(RandNumGenerator);
+
 	CVehicle *veh = CVehicle::Create(
 		static_cast<uint16_t>(params[1]),
 		amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]), amx_ctof(params[5]),
-		static_cast<uint8_t>(params[6]), static_cast<uint8_t>(params[7])
+		static_cast<uint8_t>(color1), static_cast<uint8_t>(color2)
 	);
 	return veh->GetId();
 }
@@ -151,24 +168,22 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
 //native Streamer_SetVehicleColor(vehicleid, color1, color2);
 AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 {
-	static boost::random::mt19937 rand_num_generator;
-	static boost::random::uniform_int_distribution<> rand_num_dist(0, 255);
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
 		return -1;
 
-	int8_t
-		color1 = static_cast<int8_t>(params[2]),
-		color2 = static_cast<int8_t>(params[3]);
+	int16_t
+		color1 = static_cast<int16_t>(params[2]),
+		color2 = static_cast<int16_t>(params[3]);
 
 	if (color1 > 255 || color2 > 255)
 		return -1;
 
 	if (color1 < 0)
-		color1 = rand_num_dist(rand_num_generator);
+		color1 = RandNumColorDist(RandNumGenerator);
 
 	if (color2 < 0)
-		color2 = rand_num_dist(rand_num_generator);
+		color2 = RandNumColorDist(RandNumGenerator);
 
 
 	vehicle->SetColor(static_cast<uint8_t>(color1), static_cast<uint8_t>(color2));
