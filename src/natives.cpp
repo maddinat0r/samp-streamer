@@ -1,3 +1,6 @@
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
+
 #include "natives.h"
 #include "CPlayer.h"
 #include "CVehicle.h"
@@ -148,6 +151,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
 //native Streamer_SetVehicleColor(vehicleid, color1, color2);
 AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 {
+	static boost::random::mt19937 rand_num_generator;
+	static boost::random::uniform_int_distribution<> rand_num_dist(0, 255);
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
 		return -1;
@@ -158,6 +163,13 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 
 	if (color1 > 255 || color2 > 255)
 		return -1;
+
+	if (color1 < 0)
+		color1 = rand_num_dist(rand_num_generator);
+
+	if (color2 < 0)
+		color2 = rand_num_dist(rand_num_generator);
+
 
 	vehicle->SetColor(static_cast<uint8_t>(color1), static_cast<uint8_t>(color2));
 	return 1;
