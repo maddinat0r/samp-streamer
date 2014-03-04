@@ -148,12 +148,12 @@ public: //functions
 	{
 		return &(m_Color[0]);
 	}
-	void SetColor(uint8_t color1, uint8_t color2);
+	void SetColor(uint8_t color1, uint8_t color2, bool only_val = false);
 	inline uint8_t GetPaintjob() const
 	{
 		return m_Paintjob;
 	}
-	void SetPaintjob(uint8_t paintjobid);
+	void SetPaintjob(uint8_t paintjobid, bool only_val = false);
 	float GetHealth();
 	void SetHealth(float health);
 	int *GetDamageStatus();

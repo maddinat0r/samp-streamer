@@ -86,6 +86,22 @@ SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnPlayerStateChange(int playe
 	return true;
 }
 
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehiclePaintjob(int playerid, int vehicleid, int paintjobid)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(vehicleid);
+	if (vehicle != nullptr)
+		vehicle->SetPaintjob(paintjobid, true);
+	return true;
+}
+
+SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehicleRespray(int playerid, int vehicleid, int color1, int color2)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicleByRealID(vehicleid);
+	if (vehicle != nullptr)
+		vehicle->SetColor(color1, color2, true);
+	return true;
+}
+
 SAMPGDK_CALLBACK_EXPORT bool SAMPGDK_CALLBACK_CALL OnVehicleDeath(int vehicleid, int killerid)
 {
 

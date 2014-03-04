@@ -225,20 +225,20 @@ void CVehicle::SetVelocity(float x, float y, float z)
 		SetVehicleVelocity(m_VehicleId, x, y, z);
 }
 
-void CVehicle::SetColor(uint8_t color1, uint8_t color2)
+void CVehicle::SetColor(uint8_t color1, uint8_t color2, bool only_val)
 {
 	m_Color[0] = color1;
 	m_Color[1] = color2;
 
-	if (m_VehicleId != 0)
+	if (m_VehicleId != 0 && only_val == false)
 		ChangeVehicleColor(m_VehicleId, color1, color2);
 }
 
-void CVehicle::SetPaintjob(uint8_t paintjobid)
+void CVehicle::SetPaintjob(uint8_t paintjobid, bool only_val)
 {
 	m_Paintjob = paintjobid;
 
-	if (m_VehicleId != 0)
+	if (m_VehicleId != 0 && only_val == false)
 		ChangeVehiclePaintjob(m_VehicleId, paintjobid);
 }
 
