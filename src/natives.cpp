@@ -14,6 +14,10 @@ boost::random::uniform_int_distribution<> RandNumColorDist(0, 255);
 //native Streamer_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);
 AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
 {	
+	uint16_t modelid = static_cast<uint16_t>(params[1]);
+	if (modelid < 400 || modelid > 611)
+		return -1;
+
 	int16_t
 		color1 = static_cast<int16_t>(params[6]),
 		color2 = static_cast<int16_t>(params[7]);
@@ -28,7 +32,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
 		color2 = RandNumColorDist(RandNumGenerator);
 
 	CVehicle *veh = CVehicle::Create(
-		static_cast<uint16_t>(params[1]),
+		modelid,
 		amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]), amx_ctof(params[5]),
 		static_cast<uint8_t>(color1), static_cast<uint8_t>(color2)
 	);
