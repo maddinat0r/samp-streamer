@@ -3,6 +3,8 @@
 #define INC_CVEHICLE_H
 
 
+#include <string>
+
 #include <boost/atomic.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/mutex.hpp>
@@ -13,6 +15,8 @@
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point.hpp>
 #include <boost/geometry/index/rtree.hpp>
+
+using std::string;
 
 using boost::atomic;
 using boost::thread;
@@ -77,8 +81,12 @@ private: //variables
 	uint32_t m_Id;
 
 	uint16_t m_ModelId;
-	point m_Pos;
-	float m_FacingAngle;
+	point
+		m_Pos,
+		m_SpawnPos;
+	float
+		m_FacingAngle,
+		m_SpawnFacingAngle;
 	float m_Velocity[3];
 	uint8_t m_Color[2];
 	uint8_t m_Paintjob;
@@ -86,6 +94,8 @@ private: //variables
 	bool m_ParamsEx[7];
 	int m_DamageStatus[4];
 	int m_VirtualWorld;
+	uint8_t m_InteriorId;
+	string m_NumberPlate;
 
 
 private: //internal variables
@@ -106,6 +116,8 @@ private: //constructor / destructor
 		m_Paintjob(3),
 		m_Health(1000.0f),
 		m_VirtualWorld(0),
+		m_InteriorId(0),
+		m_NumberPlate("XYZSR998"),
 
 		m_VehicleId(0)
 	{
@@ -170,6 +182,31 @@ public: //functions
 	{
 		return m_ModelId;
 	}
+	bool *GetParamsEx();
+	void SetParamsEx(bool engine, bool lights, bool alarm, bool doors, bool bonnet, bool boot, bool objective);
+	inline uint8_t GetInterior() const
+	{
+		return m_InteriorId;
+	}
+	void SetInterior(uint8_t interiorid);
+
+	inline bool IsStreamedForPlayer(CPlayer* player)
+	{
+		return m_StreamedFor.find(player) != m_StreamedFor.end();
+	}
+	inline float GetDistance(float x, float y, float z)
+	{
+		return static_cast<float>(geo::distance(GetPos(), point(x, y, z)));
+	}
+	CPlayer *GetPlayerInSeat(int8_t seatid);
+	int8_t GetPlayerSeatId(CPlayer* player);
+	void SetToRespawn();
+	inline const char *GetNumberPlate()
+	{
+		return m_NumberPlate.c_str();
+	}
+	void SetNumberPlate(string numberplate);
+	bool PutPlayerInSeat(CPlayer* player, int8_t seatid);
 
 
 public: //callback functions

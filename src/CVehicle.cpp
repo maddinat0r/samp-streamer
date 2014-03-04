@@ -4,6 +4,7 @@
 #include "COption.h"
 
 #include <sampgdk/a_vehicles.h>
+#include <sampgdk/a_players.h>
 
 #include <boost/chrono/chrono.hpp>
 namespace chrono = boost::chrono;
@@ -112,8 +113,8 @@ CVehicle *CVehicle::Create(uint16_t modelid,
 
 	veh->m_ModelId = modelid;
 
-	veh->m_Pos = point(pos_x, pos_y, pos_z);
-	veh->m_FacingAngle = pos_a;
+	veh->m_Pos = veh->m_SpawnPos = point(pos_x, pos_y, pos_z);
+	veh->m_FacingAngle = veh->m_SpawnFacingAngle = pos_a;
 
 	veh->m_Color[0] = color1;
 	veh->m_Color[1] = color2;
@@ -133,6 +134,9 @@ void CVehicle::Destroy()
 
 void CVehicle::CreateInternalVeh()
 {
+	if (m_VehicleId != 0)
+		return;
+	
 	m_VehicleId = CreateVehicle(m_ModelId, geo::get<0>(m_Pos), geo::get<1>(m_Pos), geo::get<2>(m_Pos), m_FacingAngle, m_Color[0], m_Color[1], -1);
 	SetVehicleVelocity(m_VehicleId, m_Velocity[0], m_Velocity[1], m_Velocity[2]);
 	if (COption::Get()->IsUsingVehicleParamsEx())
@@ -141,10 +145,15 @@ void CVehicle::CreateInternalVeh()
 	SetVehicleHealth(m_VehicleId, m_Health);
 	UpdateVehicleDamageStatus(m_VehicleId, m_DamageStatus[0], m_DamageStatus[1], m_DamageStatus[2], m_DamageStatus[3]);
 	SetVehicleVirtualWorld(m_VehicleId, m_VirtualWorld);
+	LinkVehicleToInterior(m_VehicleId, m_InteriorId);
+	SetVehicleNumberPlate(m_VehicleId, m_NumberPlate.c_str());
 }
 
 void CVehicle::DestroyInternalVeh()
 {
+	if (m_VehicleId == 0)
+		return;
+	
 	Update();
 	DestroyVehicle(m_VehicleId);
 	m_VehicleId = 0;
@@ -288,6 +297,87 @@ void CVehicle::SetVirtualWorld(int worldid)
 
 	if (m_VehicleId != 0)
 		SetVehicleVirtualWorld(m_VehicleId, worldid);
+}
+
+bool *CVehicle::GetParamsEx()
+{
+	if (m_VehicleId != 0)
+		GetVehicleParamsEx(m_VehicleId, &m_ParamsEx[0], &m_ParamsEx[1], &m_ParamsEx[2], &m_ParamsEx[3], &m_ParamsEx[4], &m_ParamsEx[5], &m_ParamsEx[6]);
+
+	return &(m_ParamsEx[0]);
+}
+void CVehicle::SetParamsEx(bool engine, bool lights, bool alarm, bool doors, bool bonnet, bool boot, bool objective)
+{
+	m_ParamsEx[0] = engine;
+	m_ParamsEx[1] = lights;
+	m_ParamsEx[2] = alarm;
+	m_ParamsEx[3] = doors;
+	m_ParamsEx[4] = bonnet;
+	m_ParamsEx[5] = boot;
+	m_ParamsEx[6] = objective;
+
+	if (m_VehicleId != 0 && COption::Get()->IsUsingVehicleParamsEx() == true)
+		SetVehicleParamsEx(m_VehicleId, engine, lights, alarm, doors, bonnet, boot, objective);
+}
+
+void CVehicle::SetInterior(uint8_t interiorid)
+{
+	m_InteriorId = interiorid;
+
+	if (m_VehicleId != 0)
+		LinkVehicleToInterior(m_VehicleId, interiorid);
+}
+
+
+CPlayer *CVehicle::GetPlayerInSeat(int8_t seatid)
+{
+	CPlayer *player = nullptr;
+	auto i = m_SeatInfo.find(seatid);
+	if (i != m_SeatInfo.end())
+		player = i->second;
+	return player;
+}
+int8_t CVehicle::GetPlayerSeatId(CPlayer* player)
+{
+	for (auto &s : m_SeatInfo)
+	{
+		if (s.second == player)
+			return s.first;
+	}
+	return -1;
+}
+void CVehicle::SetToRespawn()
+{
+	SetPos(geo::get<0>(m_SpawnPos), geo::get<1>(m_SpawnPos), geo::get<2>(m_SpawnPos));
+	SetFacingAngle(m_SpawnFacingAngle);
+}
+void CVehicle::SetNumberPlate(string numberplate)
+{
+	m_NumberPlate = numberplate;
+
+	if (m_VehicleId != 0)
+		SetVehicleNumberPlate(m_VehicleId, numberplate.c_str());
+}
+bool CVehicle::PutPlayerInSeat(CPlayer* player, int8_t seatid)
+{
+	if (m_VehicleId == 0)
+		CreateInternalVeh();
+
+	if (m_SeatInfo.find(seatid) != m_SeatInfo.end())
+		return false; //seat is already taken
+
+	int8_t old_seatid = GetPlayerSeatId(player);
+	if (seatid == old_seatid)
+		return false;
+
+
+	PutPlayerInVehicle(player->GetId(), m_VehicleId, seatid);
+
+	m_SeatInfo.insert(unordered_map<int8_t, CPlayer *>::value_type(seatid, player));
+
+	if (old_seatid != -1) //make old seat free
+		m_SeatInfo.erase(old_seatid);
+	return true;
 }
 
 

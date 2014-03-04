@@ -42,13 +42,29 @@ namespace Native
 	AMX_DECLARE_NATIVE(Streamer_SetVehicleHealth);
 	AMX_DECLARE_NATIVE(Streamer_GetVehicleDamageStatus);
 	AMX_DECLARE_NATIVE(Streamer_SetVehicleDamageStatus);
+	AMX_DECLARE_NATIVE(Streamer_GetVehicleParamsEx);
+	AMX_DECLARE_NATIVE(Streamer_SetVehicleParamsEx);
 
 	AMX_DECLARE_NATIVE(Streamer_GetVehicleVirtualWorld);
 	AMX_DECLARE_NATIVE(Streamer_SetVehicleVirtualWorld);
 
-	AMX_DECLARE_NATIVE(Streamer_GetVehicleModel);
+	AMX_DECLARE_NATIVE(Streamer_LinkVehicleToInterior);
+	AMX_DECLARE_NATIVE(Streamer_GetVehicleInterior);
 
+	AMX_DECLARE_NATIVE(Streamer_GetVehicleModel);
+	AMX_DECLARE_NATIVE(Streamer_IsVehicleStreamedIn);
+	AMX_DECLARE_NATIVE(Streamer_GetVehicleDistance);
+	AMX_DECLARE_NATIVE(Streamer_GetPlayerInVehicleSeat);
+
+	AMX_DECLARE_NATIVE(Streamer_SetVehicleToRespawn);
+	AMX_DECLARE_NATIVE(Streamer_SetVehicleNumberPlate);
+
+	AMX_DECLARE_NATIVE(Streamer_PutPlayerInVehicle);
 	AMX_DECLARE_NATIVE(Streamer_GetPlayerVehicleID);
+	AMX_DECLARE_NATIVE(Streamer_GetPlayerVehicleSeat);
+
+	AMX_DECLARE_NATIVE(Streamer_IsPlayerInVehicle);
+	AMX_DECLARE_NATIVE(Streamer_IsPlayerInAnyVehicle);
 }
 
 

@@ -140,10 +140,23 @@ extern "C" const AMX_NATIVE_INFO native_list[] =
 	AMX_DEFINE_NATIVE(Streamer_SetVehicleHealth)
 	AMX_DEFINE_NATIVE(Streamer_GetVehicleDamageStatus)
 	AMX_DEFINE_NATIVE(Streamer_SetVehicleDamageStatus)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleParamsEx)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleParamsEx)
 	AMX_DEFINE_NATIVE(Streamer_GetVehicleVirtualWorld)
 	AMX_DEFINE_NATIVE(Streamer_SetVehicleVirtualWorld)
+	AMX_DEFINE_NATIVE(Streamer_LinkVehicleToInterior)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleInterior)
 	AMX_DEFINE_NATIVE(Streamer_GetVehicleModel)
+	AMX_DEFINE_NATIVE(Streamer_IsVehicleStreamedIn)
+	AMX_DEFINE_NATIVE(Streamer_GetVehicleDistance)
+	AMX_DEFINE_NATIVE(Streamer_GetPlayerInVehicleSeat)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleToRespawn)
+	AMX_DEFINE_NATIVE(Streamer_SetVehicleNumberPlate)
+	AMX_DEFINE_NATIVE(Streamer_PutPlayerInVehicle)
 	AMX_DEFINE_NATIVE(Streamer_GetPlayerVehicleID)
+	AMX_DEFINE_NATIVE(Streamer_GetPlayerVehicleSeat)
+	AMX_DEFINE_NATIVE(Streamer_IsPlayerInVehicle)
+	AMX_DEFINE_NATIVE(Streamer_IsPlayerInAnyVehicle)
 
 	{0, 0}
 };
