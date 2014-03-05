@@ -44,7 +44,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_DestroyVehicle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->Destroy();
@@ -56,7 +56,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePos)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	cell 
@@ -85,7 +85,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePos)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetPos(amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]));
@@ -97,7 +97,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleZAngle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	cell *addr_a = nullptr;
@@ -114,7 +114,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleZAngle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetFacingAngle(amx_ctof(params[2]));
@@ -126,7 +126,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVelocity)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	float *veh_velocity = vehicle->GetVelocity();
@@ -144,7 +144,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVelocity)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetVelocity(amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]));
@@ -156,7 +156,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	uint8_t *color_array = vehicle->GetColor();
@@ -174,14 +174,14 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 	int16_t
 		color1 = static_cast<int16_t>(params[2]),
 		color2 = static_cast<int16_t>(params[3]);
 
 	if (color1 > 255 || color2 > 255)
-		return -1;
+		return 0;
 
 	if (color1 < 0)
 		color1 = RandNumColorDist(RandNumGenerator);
@@ -210,7 +210,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePaintjob)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 	
 
 	vehicle->SetPaintjob(static_cast<uint8_t>(params[2]));
@@ -222,7 +222,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleHealth)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	cell *addr_health = nullptr;
@@ -239,7 +239,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleHealth)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetHealth(amx_ctof(params[2]));
@@ -251,7 +251,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDamageStatus)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	int *dmg_status_array = vehicle->GetDamageStatus();
@@ -269,7 +269,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleDamageStatus)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetDamageStatus(params[2], params[3], params[4], params[5]);
@@ -281,7 +281,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleParamsEx)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr || COption::Get()->IsUsingVehicleParamsEx() == false)
-		return -1;
+		return 0;
 
 
 	bool *params_array = vehicle->GetParamsEx();
@@ -299,7 +299,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleParamsEx)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	COption::Get()->UseVehicleParamsEx(true);
@@ -323,12 +323,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVirtualWorld)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 	int worldid = params[2];
-
 	if (worldid < 0)
-		return -1;
+		return 0;
 
 
 	vehicle->SetVirtualWorld(worldid);
@@ -340,12 +339,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_LinkVehicleToInterior)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 	int interiorid = params[2];
-
 	if (interiorid < 0)
-		return -1;
+		return 0;
 
 
 	vehicle->SetInterior(static_cast<uint8_t>(interiorid));
@@ -379,11 +377,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsVehicleStreamedIn)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[2]));
 	if (player == nullptr)
-		return -1;
+		return 0;
 
 
 	return vehicle->IsStreamedForPlayer(player) == true ? 1 : 0;
@@ -392,12 +390,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsVehicleStreamedIn)
 //native Float:Streamer_GetVehicleDistance(vehicleid, Float:X, Float:Y, Float:Z);
 AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDistance)
 {
+	float distance = 0.0;
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
-	if (vehicle == nullptr)
-		return -1;
 
-
-	float distance = vehicle->GetDistance(amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]));
+	if (vehicle != nullptr)
+		distance = vehicle->GetDistance(amx_ctof(params[2]), amx_ctof(params[3]), amx_ctof(params[4]));
 	return amx_ftoc(distance);
 }
 
@@ -418,7 +415,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleToRespawn)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	vehicle->SetToRespawn();
@@ -430,7 +427,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleNumberPlate)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	char *tmp_plate_str = nullptr;
@@ -444,14 +441,14 @@ AMX_DECLARE_NATIVE(Native::Streamer_PutPlayerInVehicle)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
-		return -1;
+		return 0;
 
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[2]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 	
-	return vehicle->PutPlayerInSeat(player, static_cast<int8_t>(params[3])) == true ? 1 : -1;
+	return vehicle->PutPlayerInSeat(player, static_cast<int8_t>(params[3])) == true ? 1 : 0;
 }
 
 //native Streamer_GetPlayerVehicleID(playerid);
@@ -459,7 +456,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerVehicleID)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
-		return -1;
+		return 0;
 
 
 	return player->OccupiedVehicle == nullptr ? 0 : static_cast<cell>(player->OccupiedVehicle->GetId());
@@ -484,11 +481,11 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInVehicle)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
-		return -1;
+		return 0;
 	
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[2]));
 	if (vehicle == nullptr)
-		return -1;
+		return 0;
 
 
 	return vehicle == player->OccupiedVehicle ? 1 : 0;
@@ -499,7 +496,7 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInAnyVehicle)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
-		return -1;
+		return 0;
 
 
 	return player->OccupiedVehicle == nullptr ? 0 : 1;
