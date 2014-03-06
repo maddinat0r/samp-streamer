@@ -307,6 +307,34 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleParamsEx)
 	return 1;
 }
 
+//native Streamer_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest))
+AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleNumberPlate)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+
+	cell *dest_addr = nullptr;
+	amx_GetAddr(amx, params[2], &dest_addr);
+	amx_SetString(dest_addr, vehicle->GetNumberPlate(), 0, 0, params[3]);
+	return 1;
+}
+
+//native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
+AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleNumberPlate)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+
+	char *tmp_plate_str = nullptr;
+	amx_StrParam(amx, params[2], tmp_plate_str);
+	vehicle->SetNumberPlate(tmp_plate_str == nullptr ? string() : tmp_plate_str);
+	return 1;
+}
+
 //native Streamer_GetVehicleVirtualWorld(vehicleid);
 AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVirtualWorld)
 {
@@ -419,20 +447,6 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleToRespawn)
 
 
 	vehicle->SetToRespawn();
-	return 1;
-}
-
-//native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleNumberPlate)
-{
-	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
-	if (vehicle == nullptr)
-		return 0;
-
-
-	char *tmp_plate_str = nullptr;
-	amx_StrParam(amx, params[2], tmp_plate_str);
-	vehicle->SetNumberPlate(tmp_plate_str == nullptr ? string() : tmp_plate_str);
 	return 1;
 }
 

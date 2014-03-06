@@ -184,6 +184,11 @@ public: //functions
 	}
 	bool *GetParamsEx();
 	void SetParamsEx(bool engine, bool lights, bool alarm, bool doors, bool bonnet, bool boot, bool objective);
+	inline const char *GetNumberPlate()
+	{
+		return m_NumberPlate.c_str();
+	}
+	void SetNumberPlate(string numberplate);
 	inline uint8_t GetInterior() const
 	{
 		return m_InteriorId;
@@ -201,11 +206,6 @@ public: //functions
 	CPlayer *GetPlayerInSeat(int8_t seatid);
 	int8_t GetPlayerSeatId(CPlayer* player);
 	void SetToRespawn();
-	inline const char *GetNumberPlate()
-	{
-		return m_NumberPlate.c_str();
-	}
-	void SetNumberPlate(string numberplate);
 	bool PutPlayerInSeat(CPlayer* player, int8_t seatid);
 
 

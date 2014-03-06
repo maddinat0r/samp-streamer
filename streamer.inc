@@ -47,6 +47,8 @@ native Streamer_GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tir
 native Streamer_SetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 native Streamer_GetVehicleParamsEx(vehicleid, &engine, &lights, &alarm, &doors, &bonnet, &boot, &objective);
 native Streamer_SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
+native Streamer_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest))
+native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
 
 native Streamer_GetVehicleVirtualWorld(vehicleid);
 native Streamer_SetVehicleVirtualWorld(vehicleid, worldid);
@@ -60,7 +62,6 @@ native Float:Streamer_GetVehicleDistance(vehicleid, Float:X, Float:Y, Float:Z);
 native Streamer_GetPlayerInVehicleSeat(vehicleid, seatid);
 
 native Streamer_SetVehicleToRespawn(vehicleid);
-native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
 
 native Streamer_PutPlayerInVehicle(playerid, vehicleid, seatid);
 native Streamer_GetPlayerVehicleID(playerid);
