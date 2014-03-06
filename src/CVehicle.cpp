@@ -98,8 +98,8 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 
 CVehicleHandler::~CVehicleHandler()
 {
-	for(unordered_map<uint32_t, CVehicle *>::iterator i = m_Vehicles.begin(), end = m_Vehicles.end(); i != end; ++i)
-		i->second->Destroy();
+	for (auto &v : m_Vehicles)
+		v.second->Destroy();
 }
 
 
@@ -390,11 +390,11 @@ void CVehicle::OnPlayerEnter(CPlayer *player, int8_t seatid)
 void CVehicle::OnPlayerExit(CPlayer *player)
 {
 	Update();
-	for(unordered_map<int8_t, CPlayer *>::iterator i = m_SeatInfo.begin(), end = m_SeatInfo.end(); i != end; ++i)
+	for(auto &s : m_SeatInfo)
 	{
-		if(i->second == player)
+		if(s.second == player)
 		{
-			m_SeatInfo.quick_erase(i);
+			m_SeatInfo.erase(s.first);
 			break;
 		}
 	}
