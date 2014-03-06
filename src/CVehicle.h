@@ -43,7 +43,7 @@ private: //variables
 	queue<uint32_t> m_UnusedIds;
 
 	mutex m_RtreeMtx;
-	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
+	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16> > m_Rtree;
 
 	CVehicleHandler() {}
 	~CVehicleHandler();
