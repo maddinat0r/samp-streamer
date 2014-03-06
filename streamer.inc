@@ -47,7 +47,7 @@ native Streamer_GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tir
 native Streamer_SetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
 native Streamer_GetVehicleParamsEx(vehicleid, &engine, &lights, &alarm, &doors, &bonnet, &boot, &objective);
 native Streamer_SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
-native Streamer_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest))
+native Streamer_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest));
 native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
 
 native Streamer_GetVehicleVirtualWorld(vehicleid);
