@@ -17,9 +17,15 @@ void CVehicleHandler::AddVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 {
 	if(only_rtree == false)
 	{
-		veh->m_Id = 1;
-		while(m_Vehicles.find(veh->m_Id) != m_Vehicles.end())
-			veh->m_Id++;
+		static uint32_t current_id = 1;
+
+		if (!m_UnusedIds.empty())
+		{
+			veh->m_Id = m_UnusedIds.front();
+			m_UnusedIds.pop();
+		}
+		else
+			veh->m_Id = current_id++;
 
 		m_Vehicles.insert(unordered_map<uint32_t, CVehicle *>::value_type(veh->m_Id, veh));
 	}
@@ -32,8 +38,11 @@ void CVehicleHandler::AddVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 
 void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 {
-	if(only_rtree == false)
+	if (only_rtree == false)
+	{
 		m_Vehicles.quick_erase(m_Vehicles.find(veh->m_Id));
+		m_UnusedIds.push(veh->m_Id);
+	}
 	
 	m_RtreeMtx.lock();
 	m_Rtree.remove(veh->m_LastRtreeValue);

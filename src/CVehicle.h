@@ -4,6 +4,7 @@
 
 
 #include <string>
+#include <queue>
 
 #include <boost/atomic.hpp>
 #include <boost/thread/thread.hpp>
@@ -17,6 +18,7 @@
 #include <boost/geometry/index/rtree.hpp>
 
 using std::string;
+using std::queue;
 
 using boost::atomic;
 using boost::thread;
@@ -38,6 +40,8 @@ class CVehicleHandler
 {
 private: //variables
 	unordered_map<uint32_t, CVehicle *> m_Vehicles;
+	queue<uint32_t> m_UnusedIds;
+
 	mutex m_RtreeMtx;
 	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16387> > m_Rtree;
 
