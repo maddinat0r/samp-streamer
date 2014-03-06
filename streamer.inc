@@ -67,4 +67,3 @@ native Streamer_GetPlayerVehicleID(playerid);
 native Streamer_GetPlayerVehicleSeat(playerid);
 
 native Streamer_IsPlayerInVehicle(playerid, vehicleid);
-native Streamer_IsPlayerInAnyVehicle(playerid);

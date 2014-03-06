@@ -62,7 +62,6 @@ namespace Native
 	AMX_DECLARE_NATIVE(Streamer_GetPlayerVehicleSeat);
 
 	AMX_DECLARE_NATIVE(Streamer_IsPlayerInVehicle);
-	AMX_DECLARE_NATIVE(Streamer_IsPlayerInAnyVehicle);
 }
 
 

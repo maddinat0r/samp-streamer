@@ -491,16 +491,6 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInVehicle)
 	return vehicle == player->OccupiedVehicle ? 1 : 0;
 }
 
-//native Streamer_IsPlayerInAnyVehicle(playerid);
-AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInAnyVehicle)
-{
-	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
-	if (player == nullptr)
-		return 0;
-
-
-	return player->OccupiedVehicle == nullptr ? 0 : 1;
-}
 
 
 

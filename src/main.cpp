@@ -155,7 +155,6 @@ extern "C" const AMX_NATIVE_INFO native_list[] =
 	AMX_DEFINE_NATIVE(Streamer_GetPlayerVehicleID)
 	AMX_DEFINE_NATIVE(Streamer_GetPlayerVehicleSeat)
 	AMX_DEFINE_NATIVE(Streamer_IsPlayerInVehicle)
-	AMX_DEFINE_NATIVE(Streamer_IsPlayerInAnyVehicle)
 
 	{0, 0}
 };
