@@ -65,14 +65,14 @@ CVehicle *CVehicleHandler::FindVehicleByRealID(uint32_t vehid)
 	return nullptr;
 }
 
-bool stream_check_func(const boost::tuple<point, CVehicle *> &v, CPlayer *player)
+bool stream_check_func(const tuple<point, CVehicle *> &v, CPlayer *player)
 {
 	const point &veh_pos = boost::get<0>(v);
 	return player->ShouldStream(geo::get<0>(veh_pos), geo::get<1>(veh_pos), geo::get<2>(veh_pos), COption::Get()->GetVehicleStreamDistance());
 }
 void CVehicleHandler::StreamAll(CPlayer *player)
 {
-	std::vector<boost::tuple<point, CVehicle *> > query_res;
+	std::vector<tuple<point, CVehicle *> > query_res;
 	m_RtreeMtx.lock();
 	m_Rtree.query(geo::index::satisfies(boost::bind(&stream_check_func, _1, player)), std::back_inserter(query_res));
 	m_RtreeMtx.unlock();
