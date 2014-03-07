@@ -11,8 +11,8 @@ boost::random::mt19937 RandNumGenerator;
 boost::random::uniform_int_distribution<> RandNumColorDist(0, 255);
 
 
-//native Streamer_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);
-AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
+//native MSP_CreateVehicle(modelid, Float:pos_x, Float:pos_y, Float:pos_z, Float:pos_a, color1, color2);
+AMX_DECLARE_NATIVE(Native::MSP_CreateVehicle)
 {	
 	uint16_t modelid = static_cast<uint16_t>(params[1]);
 	if (modelid < 400 || modelid > 611)
@@ -39,8 +39,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_CreateVehicle)
 	return veh->GetId();
 }
 
-//native Streamer_DestroyVehicle(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_DestroyVehicle)
+//native MSP_DestroyVehicle(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_DestroyVehicle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -51,8 +51,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_DestroyVehicle)
 	return 1;
 }
 
-//native Streamer_GetVehiclePos(vehicleid, &Float:x, &Float:y, &Float:z);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePos)
+//native MSP_GetVehiclePos(vehicleid, &Float:x, &Float:y, &Float:z);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehiclePos)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -80,8 +80,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePos)
 	return 1;
 }
 
-//native Streamer_SetVehiclePos(vehicleid, Float:x, Float:y, Float:z);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePos)
+//native MSP_SetVehiclePos(vehicleid, Float:x, Float:y, Float:z);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehiclePos)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -92,8 +92,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePos)
 	return 1;
 }
 
-//native Streamer_GetVehicleZAngle(vehicleid, &Float:z_angle);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleZAngle)
+//native MSP_GetVehicleZAngle(vehicleid, &Float:z_angle);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleZAngle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -109,8 +109,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleZAngle)
 	return 1;
 }
 
-//native Streamer_SetVehicleZAngle(vehicleid, Float:z_angle);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleZAngle)
+//native MSP_SetVehicleZAngle(vehicleid, Float:z_angle);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleZAngle)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -121,8 +121,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleZAngle)
 	return 1;
 }
 
-//native Streamer_GetVehicleVelocity(vehicleid, &Float:x, &Float:y, &Float:z);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVelocity)
+//native MSP_GetVehicleVelocity(vehicleid, &Float:x, &Float:y, &Float:z);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleVelocity)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -139,8 +139,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVelocity)
 	return 1;
 }
 
-//native Streamer_SetVehicleVelocity(vehicleid, Float:x, Float:y, Float:z);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVelocity)
+//native MSP_SetVehicleVelocity(vehicleid, Float:x, Float:y, Float:z);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleVelocity)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -151,8 +151,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVelocity)
 	return 1;
 }
 
-//native Streamer_GetVehicleColor(vehicleid, &color1, &color2);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
+//native MSP_GetVehicleColor(vehicleid, &color1, &color2);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleColor)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -169,8 +169,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleColor)
 	return 1;
 }
 
-//native Streamer_SetVehicleColor(vehicleid, color1, color2);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
+//native MSP_SetVehicleColor(vehicleid, color1, color2);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleColor)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -194,8 +194,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleColor)
 	return 1;
 }
 
-//native Streamer_GetVehiclePaintjob(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePaintjob)
+//native MSP_GetVehiclePaintjob(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehiclePaintjob)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -205,8 +205,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehiclePaintjob)
 	return static_cast<cell>(vehicle->GetPaintjob());
 }
 
-//native Streamer_SetVehiclePaintjob(vehicleid, paintjobid);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePaintjob)
+//native MSP_SetVehiclePaintjob(vehicleid, paintjobid);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehiclePaintjob)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -217,8 +217,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehiclePaintjob)
 	return 1;
 }
 
-//native Streamer_GetVehicleHealth(vehicleid, &Float:health);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleHealth)
+//native MSP_GetVehicleHealth(vehicleid, &Float:health);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleHealth)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -234,8 +234,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleHealth)
 	return 1;
 }
 
-//native Streamer_SetVehicleHealth(vehicleid, Float:health);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleHealth)
+//native MSP_SetVehicleHealth(vehicleid, Float:health);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleHealth)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -246,8 +246,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleHealth)
 	return 1;
 }
 
-//native Streamer_GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tires);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDamageStatus)
+//native MSP_GetVehicleDamageStatus(vehicleid, &panels, &doors, &lights, &tires);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleDamageStatus)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -264,8 +264,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDamageStatus)
 	return 1;
 }
 
-//native Streamer_SetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleDamageStatus)
+//native MSP_SetVehicleDamageStatus(vehicleid, panels, doors, lights, tires);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleDamageStatus)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -276,8 +276,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleDamageStatus)
 	return 1;
 }
 
-//native Streamer_GetVehicleParamsEx(vehicleid, &engine, &lights, &alarm, &doors, &bonnet, &boot, &objective);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleParamsEx)
+//native MSP_GetVehicleParamsEx(vehicleid, &engine, &lights, &alarm, &doors, &bonnet, &boot, &objective);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleParamsEx)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr || COption::Get()->IsUsingVehicleParamsEx() == false)
@@ -294,8 +294,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleParamsEx)
 	return 1;
 }
 
-//native Streamer_SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleParamsEx)
+//native MSP_SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleParamsEx)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -307,8 +307,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleParamsEx)
 	return 1;
 }
 
-//native Streamer_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest))
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleNumberPlate)
+//native MSP_GetVehicleNumberPlate(vehicleid, dest[], max_len=sizeof(dest))
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleNumberPlate)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -321,8 +321,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleNumberPlate)
 	return 1;
 }
 
-//native Streamer_SetVehicleNumberPlate(vehicleid, numberplate[]);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleNumberPlate)
+//native MSP_SetVehicleNumberPlate(vehicleid, numberplate[]);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleNumberPlate)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -335,8 +335,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleNumberPlate)
 	return 1;
 }
 
-//native Streamer_GetVehicleVirtualWorld(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVirtualWorld)
+//native MSP_GetVehicleVirtualWorld(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleVirtualWorld)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -346,8 +346,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleVirtualWorld)
 	return vehicle->GetVirtualWorld();
 }
 
-//native Streamer_SetVehicleVirtualWorld(vehicleid, worldid);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVirtualWorld)
+//native MSP_SetVehicleVirtualWorld(vehicleid, worldid);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleVirtualWorld)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -362,8 +362,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleVirtualWorld)
 	return 1;
 }
 
-//native Streamer_LinkVehicleToInterior(vehicleid, interiorid);
-AMX_DECLARE_NATIVE(Native::Streamer_LinkVehicleToInterior)
+//native MSP_LinkVehicleToInterior(vehicleid, interiorid);
+AMX_DECLARE_NATIVE(Native::MSP_LinkVehicleToInterior)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -378,8 +378,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_LinkVehicleToInterior)
 	return 1;
 }
 
-//native Streamer_GetVehicleInterior(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleInterior)
+//native MSP_GetVehicleInterior(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleInterior)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -389,8 +389,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleInterior)
 	return static_cast<cell>(vehicle->GetInterior());
 }
 
-//native Streamer_GetVehicleModel(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleModel)
+//native MSP_GetVehicleModel(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleModel)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -400,8 +400,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleModel)
 	return static_cast<cell>(vehicle->GetModelId());
 }
 
-//native Streamer_IsVehicleStreamedIn(vehicleid, forplayerid);
-AMX_DECLARE_NATIVE(Native::Streamer_IsVehicleStreamedIn)
+//native MSP_IsVehicleStreamedIn(vehicleid, forplayerid);
+AMX_DECLARE_NATIVE(Native::MSP_IsVehicleStreamedIn)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -415,8 +415,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsVehicleStreamedIn)
 	return vehicle->IsStreamedForPlayer(player) == true ? 1 : 0;
 }
 
-//native Float:Streamer_GetVehicleDistance(vehicleid, Float:X, Float:Y, Float:Z);
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDistance)
+//native Float:MSP_GetVehicleDistance(vehicleid, Float:X, Float:Y, Float:Z);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleDistance)
 {
 	float distance = 0.0;
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
@@ -426,8 +426,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleDistance)
 	return amx_ftoc(distance);
 }
 
-//native Streamer_GetPlayerInVehicleSeat(vehicleid, seatid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerInVehicleSeat)
+//native MSP_GetPlayerInVehicleSeat(vehicleid, seatid);
+AMX_DECLARE_NATIVE(Native::MSP_GetPlayerInVehicleSeat)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -438,8 +438,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerInVehicleSeat)
 	return player == nullptr ? -1 : static_cast<cell>(player->GetId());
 }
 
-//native Streamer_SetVehicleToRespawn(vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleToRespawn)
+//native MSP_SetVehicleToRespawn(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleToRespawn)
 {
 	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
 	if (vehicle == nullptr)
@@ -450,8 +450,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleToRespawn)
 	return 1;
 }
 
-//native Streamer_PutPlayerInVehicle(playerid, vehicleid, seatid);
-AMX_DECLARE_NATIVE(Native::Streamer_PutPlayerInVehicle)
+//native MSP_PutPlayerInVehicle(playerid, vehicleid, seatid);
+AMX_DECLARE_NATIVE(Native::MSP_PutPlayerInVehicle)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
@@ -465,8 +465,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_PutPlayerInVehicle)
 	return vehicle->PutPlayerInSeat(player, static_cast<int8_t>(params[3])) == true ? 1 : 0;
 }
 
-//native Streamer_GetPlayerVehicleID(playerid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerVehicleID)
+//native MSP_GetPlayerVehicleID(playerid);
+AMX_DECLARE_NATIVE(Native::MSP_GetPlayerVehicleID)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
@@ -476,8 +476,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerVehicleID)
 	return player->OccupiedVehicle == nullptr ? 0 : static_cast<cell>(player->OccupiedVehicle->GetId());
 }
 
-//native Streamer_GetPlayerVehicleSeat(playerid);
-AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerVehicleSeat)
+//native MSP_GetPlayerVehicleSeat(playerid);
+AMX_DECLARE_NATIVE(Native::MSP_GetPlayerVehicleSeat)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
@@ -490,8 +490,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_GetPlayerVehicleSeat)
 	return static_cast<cell>(player->OccupiedVehicle->GetPlayerSeatId(player));
 }
 
-//native Streamer_IsPlayerInVehicle(playerid, vehicleid);
-AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInVehicle)
+//native MSP_IsPlayerInVehicle(playerid, vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_IsPlayerInVehicle)
 {
 	CPlayer *player = CPlayerHandler::Get()->FindPlayer(static_cast<uint16_t>(params[1]));
 	if (player == nullptr)
@@ -508,8 +508,8 @@ AMX_DECLARE_NATIVE(Native::Streamer_IsPlayerInVehicle)
 
 
 
-//native Streamer_SetRangeCheckType(E_RANGECHECK_TYPE:checktype);
-AMX_DECLARE_NATIVE(Native::Streamer_SetRangeCheckType)
+//native MSP_SetRangeCheckType(E_RANGECHECK_TYPE:checktype);
+AMX_DECLARE_NATIVE(Native::MSP_SetRangeCheckType)
 {
 	switch(static_cast<uint8_t>(params[1]))
 	{
@@ -527,21 +527,21 @@ AMX_DECLARE_NATIVE(Native::Streamer_SetRangeCheckType)
 	return 1;
 }
 
-//native E_RANGECHECK_TYPE:Streamer_GetRangeCheckType();
-AMX_DECLARE_NATIVE(Native::Streamer_GetRangeCheckType)
+//native E_RANGECHECK_TYPE:MSP_GetRangeCheckType();
+AMX_DECLARE_NATIVE(Native::MSP_GetRangeCheckType)
 {
 	return static_cast<uint8_t>(COption::Get()->GetRangeCheckType());
 }
 
-//native Streamer_SetVehicleStreamDistance(Float:distance);
-AMX_DECLARE_NATIVE(Native::Streamer_SetVehicleStreamDist)
+//native MSP_SetVehicleStreamDistance(Float:distance);
+AMX_DECLARE_NATIVE(Native::MSP_SetVehicleStreamDist)
 {
 	COption::Get()->SetVehicleStreamDistance(amx_ctof(params[1]));
 	return 1;
 }
 
-//native Float:Streamer_GetVehicleStreamDistance();
-AMX_DECLARE_NATIVE(Native::Streamer_GetVehicleStreamDist)
+//native Float:MSP_GetVehicleStreamDistance();
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleStreamDist)
 {
 	float stream_dist = COption::Get()->GetVehicleStreamDistance();
 	return amx_ftoc(stream_dist);
