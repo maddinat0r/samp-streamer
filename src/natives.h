@@ -58,11 +58,22 @@ namespace Native
 
 	AMX_DECLARE_NATIVE(MSP_SetVehicleToRespawn);
 
+	AMX_DECLARE_NATIVE(MSP_AddVehicleComponent);
+	AMX_DECLARE_NATIVE(MSP_RemoveVehicleComponent);
+	AMX_DECLARE_NATIVE(MSP_GetVehicleComponentInSlot);
+
+	AMX_DECLARE_NATIVE(MSP_AttachTrailerToVehicle);
+	AMX_DECLARE_NATIVE(MSP_DetachTrailerFromVehicle);
+	AMX_DECLARE_NATIVE(MSP_GetVehicleTrailer);
+	AMX_DECLARE_NATIVE(MSP_GetVehiclePullingTrailer);
+
 	AMX_DECLARE_NATIVE(MSP_PutPlayerInVehicle);
 	AMX_DECLARE_NATIVE(MSP_GetPlayerVehicleID);
 	AMX_DECLARE_NATIVE(MSP_GetPlayerVehicleSeat);
 
 	AMX_DECLARE_NATIVE(MSP_IsPlayerInVehicle);
+
+	AMX_DECLARE_NATIVE(MSP_IsValidVehicleComponent);
 }
 
 

@@ -58,6 +58,8 @@ public: //functions
 
 	void StreamAll(CPlayer *player);
 
+	bool IsValidComponent(uint16_t modelid, uint16_t componentid);
+
 
 private: //singleton
 	static CVehicleHandler *m_Instance;
@@ -100,6 +102,10 @@ private: //variables
 	int m_VirtualWorld;
 	uint8_t m_InteriorId;
 	string m_NumberPlate;
+	uint16_t m_Components[14];
+	CVehicle
+		*m_Trailer,
+		*m_PullingVehicle;
 
 
 private: //internal variables
@@ -122,6 +128,8 @@ private: //constructor / destructor
 		m_VirtualWorld(0),
 		m_InteriorId(0),
 		m_NumberPlate("XYZSR998"),
+		m_Trailer(nullptr),
+		m_PullingVehicle(nullptr),
 
 		m_VehicleId(0)
 	{
@@ -136,6 +144,9 @@ private: //constructor / destructor
 
 		for (size_t i = 0; i < 4; ++i)
 			m_DamageStatus[i] = 0;
+
+		for (size_t i = 0; i < 14; ++i)
+			m_Components[i] = 0;
 	}
 	~CVehicle() { }
 
@@ -210,6 +221,19 @@ public: //functions
 	CPlayer *GetPlayerInSeat(int8_t seatid);
 	int8_t GetPlayerSeatId(CPlayer* player);
 	void SetToRespawn();
+	bool AddComponent(uint16_t componentid);
+	bool RemoveComponent(uint16_t componentid);
+	uint16_t GetComponentInSlot(uint8_t slot);
+	bool AttachTrailer(CVehicle *trailer);
+	bool DetachTrailer();
+	inline CVehicle *GetTrailer()
+	{
+		return m_Trailer;
+	}
+	inline CVehicle *GetPullingVehicle()
+	{
+		return m_PullingVehicle;
+	}
 	bool PutPlayerInSeat(CPlayer* player, int8_t seatid);
 
 

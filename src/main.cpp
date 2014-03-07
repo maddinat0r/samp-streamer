@@ -152,10 +152,18 @@ extern "C" const AMX_NATIVE_INFO native_list[] =
 	AMX_DEFINE_NATIVE(MSP_GetVehicleDistance)
 	AMX_DEFINE_NATIVE(MSP_GetPlayerInVehicleSeat)
 	AMX_DEFINE_NATIVE(MSP_SetVehicleToRespawn)
+	AMX_DEFINE_NATIVE(MSP_AddVehicleComponent)
+	AMX_DEFINE_NATIVE(MSP_RemoveVehicleComponent)
+	AMX_DEFINE_NATIVE(MSP_GetVehicleComponentInSlot)
+	AMX_DEFINE_NATIVE(MSP_AttachTrailerToVehicle)
+	AMX_DEFINE_NATIVE(MSP_DetachTrailerFromVehicle)
+	AMX_DEFINE_NATIVE(MSP_GetVehicleTrailer)
+	AMX_DEFINE_NATIVE(MSP_GetVehiclePullingTrailer)
 	AMX_DEFINE_NATIVE(MSP_PutPlayerInVehicle)
 	AMX_DEFINE_NATIVE(MSP_GetPlayerVehicleID)
 	AMX_DEFINE_NATIVE(MSP_GetPlayerVehicleSeat)
 	AMX_DEFINE_NATIVE(MSP_IsPlayerInVehicle)
+	AMX_DEFINE_NATIVE(MSP_IsValidVehicleComponent)
 
 	{0, 0}
 };

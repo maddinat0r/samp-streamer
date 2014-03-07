@@ -63,9 +63,20 @@ native MSP_GetPlayerInVehicleSeat(vehicleid, seatid);
 
 native MSP_SetVehicleToRespawn(vehicleid);
 
+native MSP_AddVehicleComponent(vehicleid, componentid);
+native MSP_RemoveVehicleComponent(vehicleid, componentid);
+native MSP_GetVehicleComponentInSlot(vehicleid, slot);
+
+native MSP_AttachTrailerToVehicle(trailerid, vehicleid);
+native MSP_DetachTrailerFromVehicle(vehicleid);
+native MSP_GetVehicleTrailer(vehicleid);
+native MSP_GetVehiclePullingTrailer(trailerid);
 
 native MSP_PutPlayerInVehicle(playerid, vehicleid, seatid);
 native MSP_GetPlayerVehicleID(playerid);
 native MSP_GetPlayerVehicleSeat(playerid);
 
 native MSP_IsPlayerInVehicle(playerid, vehicleid);
+
+native MSP_IsValidVehicleComponent(modelid, componentid);
+

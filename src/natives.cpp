@@ -450,6 +450,90 @@ AMX_DECLARE_NATIVE(Native::MSP_SetVehicleToRespawn)
 	return 1;
 }
 
+//native MSP_AddVehicleComponent(vehicleid, componentid);
+AMX_DECLARE_NATIVE(Native::MSP_AddVehicleComponent)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+
+	return vehicle->AddComponent(static_cast<uint16_t>(params[2])) == true ? 1 : 0;
+}
+
+//native MSP_RemoveVehicleComponent(vehicleid, componentid);
+AMX_DECLARE_NATIVE(Native::MSP_RemoveVehicleComponent)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+
+	return vehicle->RemoveComponent(static_cast<uint16_t>(params[2])) == true ? 1 : 0;
+}
+
+//native MSP_GetVehicleComponentInSlot(vehicleid, slot);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleComponentInSlot)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return -1;
+
+
+	uint16_t componentid = vehicle->GetComponentInSlot(static_cast<uint8_t>(params[2]));
+	return componentid == 0 ? -1 : static_cast<cell>(componentid);
+}
+
+//native MSP_AttachTrailerToVehicle(trailerid, vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_AttachTrailerToVehicle)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+	CVehicle *trailer = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[2]));
+	if (trailer == nullptr)
+		return 0;
+
+
+	return vehicle->AttachTrailer(trailer) == true ? 1 : 0;
+}
+
+//native MSP_DetachTrailerFromVehicle(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_DetachTrailerFromVehicle)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return 0;
+
+
+	return vehicle->DetachTrailer() == true ? 1 : 0;
+}
+
+//native MSP_GetVehicleTrailer(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleTrailer)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return -1;
+
+
+	CVehicle *trailer = vehicle->GetTrailer();
+	return trailer == nullptr ? -1 : static_cast<cell>(trailer->GetId());
+}
+
+//native MSP_GetVehiclePullingTrailer(trailerid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehiclePullingTrailer)
+{
+	CVehicle *trailer = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (trailer == nullptr)
+		return -1;
+
+
+	CVehicle *vehicle = trailer->GetPullingVehicle();
+	return vehicle == nullptr ? -1 : static_cast<cell>(vehicle->GetId());
+}
+
 //native MSP_PutPlayerInVehicle(playerid, vehicleid, seatid);
 AMX_DECLARE_NATIVE(Native::MSP_PutPlayerInVehicle)
 {
@@ -505,6 +589,11 @@ AMX_DECLARE_NATIVE(Native::MSP_IsPlayerInVehicle)
 	return vehicle == player->OccupiedVehicle ? 1 : 0;
 }
 
+//native MSP_IsValidVehicleComponent(modelid, componentid);
+AMX_DECLARE_NATIVE(Native::MSP_IsValidVehicleComponent)
+{
+	return CVehicleHandler::Get()->IsValidComponent(static_cast<uint16_t>(params[1]), static_cast<uint16_t>(params[2])) == true ? 1 : 0;
+}
 
 
 
