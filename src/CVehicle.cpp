@@ -79,6 +79,18 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 	
 	set<CVehicle *> invalid_vehicles = player->StreamedVehicles;
 
+	//sort query_res by nearest player <-> vehicle distance
+	point &player_pos = player->GetPos();
+	std::sort(query_res.begin(), query_res.end(), 
+		[&](const tuple<point, CVehicle *> &val1, const tuple<point, CVehicle *> &val2) -> bool
+		{
+			return (geo::distance(player_pos, boost::get<0>(val1)) < geo::distance(player_pos, boost::get<0>(val2)));
+		}
+	);
+
+	if (query_res.size() > 2000)
+		query_res.resize(2000);
+
 	for(auto &t : query_res)
 	{
 		CVehicle *vehicle = boost::get<1>(t);
