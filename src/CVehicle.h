@@ -127,7 +127,7 @@ private: //constructor / destructor
 		m_Health(1000.0f),
 		m_VirtualWorld(0),
 		m_InteriorId(0),
-		m_NumberPlate("XYZSR998"),
+		m_NumberPlate("XYZR 000"),
 		m_Trailer(nullptr),
 		m_PullingVehicle(nullptr),
 
