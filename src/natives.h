@@ -32,6 +32,8 @@ namespace Native
 	AMX_DECLARE_NATIVE(MSP_SetVehicleVelocity);
 
 	AMX_DECLARE_NATIVE(MSP_GetVehicleColor);
+	AMX_DECLARE_NATIVE(MSP_GetVehicleColor1);
+	AMX_DECLARE_NATIVE(MSP_GetVehicleColor2);
 	AMX_DECLARE_NATIVE(MSP_SetVehicleColor);
 	AMX_DECLARE_NATIVE(MSP_GetVehiclePaintjob);
 	AMX_DECLARE_NATIVE(MSP_SetVehiclePaintjob);
