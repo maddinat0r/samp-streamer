@@ -11,7 +11,7 @@
 namespace chrono = boost::chrono;
 
 
-CPlayerHandler *CPlayerHandler::m_Instance = new CPlayerHandler;
+CPlayerHandler *CPlayerHandler::m_Instance = nullptr;
 
 
  CPlayerHandler::CPlayerHandler() :
@@ -45,12 +45,10 @@ void CPlayerHandler::ThreadFunc()
 	m_ThreadRunning = true;
 	while(m_ThreadRunning)
 	{
-		for(unordered_map<uint16_t, CPlayer *>::iterator i = m_Players.begin(), end = m_Players.end(); i != end; ++i) //very bad
-		{
-			CVehicleHandler::Get()->StreamAll(i->second);
-		}
+		for(auto &p : m_Players) //TODO: very bad (concurrency)
+			CVehicleHandler::Get()->StreamAll(p.second);
 
-		this_thread::sleep_for(chrono::milliseconds(20));
+		this_thread::sleep_for(chrono::milliseconds(10));
 	}
 }
 

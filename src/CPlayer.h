@@ -121,10 +121,13 @@ private: //singleton
 public: //singleton
 	inline static CPlayerHandler *Get()
 	{
+		if (m_Instance == nullptr)
+			m_Instance = new CPlayerHandler;
 		return m_Instance;
 	}
 	inline void Destroy()
 	{
+		m_Instance = nullptr;
 		delete this;
 	}
 };

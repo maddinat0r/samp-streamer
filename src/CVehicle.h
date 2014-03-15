@@ -28,12 +28,13 @@ using boost::unordered_set;
 using boost::tuple;
 namespace this_thread = boost::this_thread;
 
-namespace geo = boost::geometry;
-typedef geo::model::point<float, 3, geo::cs::cartesian> point;
-
 
 class CPlayer;
 class CVehicle;
+
+namespace geo = boost::geometry;
+typedef geo::model::point<float, 3, geo::cs::cartesian> point;
+typedef geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<32> > vehicle_rtree;
 
 
 class CVehicleHandler
@@ -41,16 +42,18 @@ class CVehicleHandler
 private: //variables
 	unordered_map<uint32_t, CVehicle *> m_Vehicles;
 	queue<uint32_t> m_UnusedIds;
+	uint32_t m_UpperId;
 
 	mutex m_RtreeMtx;
-	geo::index::rtree<tuple<point, CVehicle *>, geo::index::rstar<16> > m_Rtree;
+	vehicle_rtree m_Rtree;
 
-	CVehicleHandler() {}
+private: //(de)constructor
+	CVehicleHandler() :
+		m_UpperId(0)
+	{ }
 	~CVehicleHandler();
 	
 public: //functions
-
-
 	void AddVehicle(CVehicle *veh, bool only_rtree = false);
 	void RemoveVehicle(CVehicle *veh, bool only_rtree = false);
 	CVehicle *FindVehicle(uint32_t vid); //for use in natives
@@ -73,8 +76,8 @@ public: //singleton
 	}
 	inline void Destroy()
 	{
-		delete this;
 		m_Instance = nullptr;
+		delete this;
 	}
 };
 

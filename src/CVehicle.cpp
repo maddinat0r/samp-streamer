@@ -17,15 +17,13 @@ void CVehicleHandler::AddVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 {
 	if(only_rtree == false)
 	{
-		static uint32_t current_id = 1;
-
 		if (!m_UnusedIds.empty())
 		{
 			veh->m_Id = m_UnusedIds.front();
 			m_UnusedIds.pop();
 		}
 		else
-			veh->m_Id = current_id++;
+			veh->m_Id = ++m_UpperId;
 
 		m_Vehicles.insert(unordered_map<uint32_t, CVehicle *>::value_type(veh->m_Id, veh));
 	}
@@ -40,7 +38,7 @@ void CVehicleHandler::RemoveVehicle(CVehicle *veh, bool only_rtree /* = false*/)
 {
 	if (only_rtree == false)
 	{
-		m_Vehicles.quick_erase(m_Vehicles.find(veh->m_Id));
+		m_Vehicles.erase(veh->m_Id);
 		m_UnusedIds.push(veh->m_Id);
 	}
 	
@@ -88,8 +86,8 @@ void CVehicleHandler::StreamAll(CPlayer *player)
 		}
 	);
 
-	if (query_res.size() > 2000)
-		query_res.resize(2000);
+	if (query_res.size() > MAX_VEHICLES)
+		query_res.resize(MAX_VEHICLES);
 
 	for(auto &t : query_res)
 	{
@@ -223,7 +221,10 @@ bool CVehicleHandler::IsValidComponent(uint16_t modelid, uint16_t componentid)
 CVehicleHandler::~CVehicleHandler()
 {
 	for (auto &v : m_Vehicles)
-		v.second->Destroy();
+	{
+		v.second->DestroyInternalVeh();
+		delete v.second;
+	}
 }
 
 
