@@ -37,6 +37,8 @@ native MSP_GetVehicleVelocity(vehicleid, &Float:x, &Float:y, &Float:z);
 native MSP_SetVehicleVelocity(vehicleid, Float:x, Float:y, Float:z);
 
 native MSP_GetVehicleColor(vehicleid, &color1, &color2);
+native MSP_GetVehicleFirstColor(vehicleid);
+native MSP_GetVehicleSecondColor(vehicleid);
 native MSP_SetVehicleColor(vehicleid, color1, color2);
 native MSP_GetVehiclePaintjob(vehicleid);
 native MSP_SetVehiclePaintjob(vehicleid, paintjobid);

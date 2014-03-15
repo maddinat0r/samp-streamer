@@ -169,6 +169,28 @@ AMX_DECLARE_NATIVE(Native::MSP_GetVehicleColor)
 	return 1;
 }
 
+//native MSP_GetVehicleFirstColor(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleFirstColor)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return -1;
+
+
+	return vehicle->GetColor()[0];
+}
+
+//native MSP_GetVehicleSecondColor(vehicleid);
+AMX_DECLARE_NATIVE(Native::MSP_GetVehicleSecondColor)
+{
+	CVehicle *vehicle = CVehicleHandler::Get()->FindVehicle(static_cast<uint32_t>(params[1]));
+	if (vehicle == nullptr)
+		return -1;
+
+
+	return vehicle->GetColor()[1];
+}
+
 //native MSP_SetVehicleColor(vehicleid, color1, color2);
 AMX_DECLARE_NATIVE(Native::MSP_SetVehicleColor)
 {

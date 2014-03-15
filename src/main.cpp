@@ -132,6 +132,8 @@ extern "C" const AMX_NATIVE_INFO native_list[] =
 	AMX_DEFINE_NATIVE(MSP_GetVehicleVelocity)
 	AMX_DEFINE_NATIVE(MSP_SetVehicleVelocity)
 	AMX_DEFINE_NATIVE(MSP_GetVehicleColor)
+	AMX_DEFINE_NATIVE(MSP_GetVehicleFirstColor)
+	AMX_DEFINE_NATIVE(MSP_GetVehicleSecondColor)
 	AMX_DEFINE_NATIVE(MSP_SetVehicleColor)
 	AMX_DEFINE_NATIVE(MSP_GetVehiclePaintjob)
 	AMX_DEFINE_NATIVE(MSP_SetVehiclePaintjob)
